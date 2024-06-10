@@ -36,12 +36,14 @@ img {
 
 /* text-align: center */
 :is(h2, footer p) {
-    text-align: center;
+    text-align:center;
     font-family: "Lustria", serif;
+    color: #b1825e ;
+    background-color : #cbb2a3;
 }
 
 .card {
-    width: 18rem;
+    width: 1rem;
 
     & img {
         object-fit: contain;
@@ -64,4 +66,7 @@ img {
             width: 100%;
         }
     }
+}
+nav {
+    background-color : #cbb2a3;
 }
