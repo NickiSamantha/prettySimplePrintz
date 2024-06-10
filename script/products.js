@@ -12,7 +12,7 @@ function displayProducts(productsArray) {
     try {
         productsArray.forEach(product => {
             container.innerHTML += `
-                <div class="card">
+                <div class="col-sm-4">
                     <img src="${product.img_url}" class="card-img-top" alt="${product.productName}" loading='lazy'>
                     <div class="card-body">
                         <h5 class="card-title">${product.productName}</h5>
