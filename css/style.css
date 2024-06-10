@@ -39,7 +39,16 @@ img {
     text-align:center;
     font-family: "Lustria", serif;
     color: #b1825e ;
+    
+}
+.bottom{
     background-color : #cbb2a3;
+}
+main{
+    background-color : #f4e4da;
+}
+.text-center{
+    width: 100%;
 }
 
 .card {
@@ -55,6 +64,8 @@ img {
         grid-template-rows: subgrid;
         grid-row: span 4;
     }
+
+   /*add hover effect on cards*/
 }
 
 @media screen and (width < 768px) {
@@ -69,4 +80,16 @@ img {
 }
 nav {
     background-color : #cbb2a3;
+}
+
+.imghome {
+    
+}
+/* AboutPage*/
+.text {
+    text-align: center;
+    margin-left: 15rem;
+    margin-right: 15rem;
+
+
 }
