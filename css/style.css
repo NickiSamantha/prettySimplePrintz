@@ -88,8 +88,45 @@ nav {
 /* AboutPage*/
 .text {
     text-align: center;
-    margin-left: 15rem;
-    margin-right: 15rem;
-
-
 }
+/* Mobile responsiveness for About Page */
+@media (max-width: 768px) {
+
+    .navbar-collapse {
+      padding-top: 1rem;
+      padding-bottom: 1rem; 
+    }
+    .navbar-nav {
+      margin-bottom: 0; 
+    }
+    .navbar-nav .nav-item {
+      margin-bottom: 0.5rem; 
+    }
+  
+    /* Main content */
+    .container-fluid {
+      padding-left: 15px; 
+      padding-right: 15px; 
+    }
+    .display-2 {
+      font-size: 2rem; 
+      margin-top: 1rem; 
+      margin-bottom: 1rem; 
+    }
+    .text p {
+      font-size: 1rem; 
+    }
+  
+    /* Footer */
+    .bottom p {
+      font-size: 0.8rem; 
+    }
+  }
+  /* Products Page */
+  .btn {
+    background-color: #b1825e;
+
+  }
+  .form-control {
+    background-color: #f4e4da;
+  }
