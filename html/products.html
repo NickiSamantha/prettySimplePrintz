@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lustria&display=swap" rel="stylesheet">
      
-   <title>Pretty Simple Printz</title>
+    <title>Pretty Simple Printz</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
@@ -63,7 +63,7 @@
       <main class="container-fluid">
         <div class="row">
             <h2 class="display-2">
-                ABOUT
+                STORE
             </h2>
         </div>
         <div class="row gap-2 justify-content-center" recentProducts></div>
@@ -83,15 +83,6 @@
       crossorigin="anonymous"
     ></script>
     <!--Custom Script-->
-    <script>
-        // Current year
-        document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear()
-    // Counter
-    window.onload = () => {
-        document.querySelector('[counter]').textContent = JSON.parse(localStorage.getItem('checkout'))
-            ? JSON.parse(localStorage.getItem('checkout')).length
-            : 0
-    }
-    </script>
+    <script src="./script/code.js"></script>
   </body>
 </html>
