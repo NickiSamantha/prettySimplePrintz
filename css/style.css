@@ -1,0 +1,67 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+/* display -> grid */
+:is(body, .card) {
+    display: grid;
+}
+
+/* Number of rows */
+:is(body) {
+    grid-template-rows: auto minmax(100dvh, 100%) auto;
+    
+}
+/* navbar */
+.navbar {
+
+    & img[alt='logo'] {
+        width: 5rem;
+    }
+}
+
+/* All the images */
+img {
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* text-align: center */
+:is(h2, footer p) {
+    text-align: center;
+    font-family: "Lustria", serif;
+}
+
+.card {
+    width: 18rem;
+
+    & img {
+        object-fit: contain;
+        padding-block: .2rem;
+    }
+
+    & .card-body {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 4;
+    }
+}
+
+@media screen and (width < 768px) {
+
+    :is(.col) {
+        padding-block: .2rem;
+
+        & button {
+            width: 100%;
+        }
+    }
+}
