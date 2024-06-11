@@ -45,6 +45,46 @@ let products =
                         description: "250ml insulated tumbler with a sublimation print. Perfect all year round.",
                         amount : 300.00,
                         img_url: "https://nickisamantha.github.io/allImages/images/pspp5.jpg" 
+                    },
+                    {
+                        id: 6,
+                        productName : "Be Kind Keyring",
+                        category : "Sublimation" ,
+                        description : "White polymer keyrings with sublimation print on it.",
+                        amount : 30.00,
+                        img_url : "https://nickisamantha.github.io/allImages/images/pspp10.jpg" 
+                    },
+                    {
+                        id: 7,
+                        productName : "Positive Mind Keyring",
+                        category : "Sublimation" ,
+                        description : "White polymer keyrings with sublimation print on it.",
+                        amount : 30.00,
+                        img_url : "https://nickisamantha.github.io/allImages/images/pspp8.jpg" 
+                    },
+                    {
+                        id: 8,
+                        productName : "Pray more Keyring",
+                        category : "Sublimation" ,
+                        description : " White polymer keyrings with sublimation print on it.",
+                        amount : 30.00,
+                        img_url : "https://nickisamantha.github.io/allImages/images/pspp9.jpg" 
+                    },
+                    {
+                        id: 9,
+                        productName : "Always choose joy Keyring",
+                        category : "Sublimation" ,
+                        description : "White polymer keyrings with sublimation print on it.",
+                        amount : 30.00,
+                        img_url : "https://nickisamantha.github.io/allImages/images/pspp7.jpg" 
+                    },
+                    {
+                        id: 10,
+                        productName : "Focus on the good Keyring",
+                        category : "Sublimation" ,
+                        description : "White polymer keyrings with sublimation print on it.",
+                        amount : 30.00,
+                        img_url : "https://nickisamantha.github.io/allImages/images/pspp6.jpg" 
                     }
                 ]
             )
