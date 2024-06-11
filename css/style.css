@@ -82,9 +82,7 @@ nav {
     background-color : #cbb2a3;
 }
 
-.imghome {
-    
-}
+
 /* AboutPage*/
 .text {
     text-align: center;
@@ -123,10 +121,33 @@ nav {
     }
   }
   /* Products Page */
-  .btn {
-    background-color: #b1825e;
+ /* Styles for search bar and sorting button */
+#searchProduct,
+#sorting {
+    margin-bottom: 20px;
+}
 
-  }
-  .form-control {
-    background-color: #f4e4da;
-  }
+/* Padding at the bottom before the footer */
+.container {
+    padding-bottom: 20px; /* Adjust the padding as needed */
+}
+
+/* Black border and hover effect for buttons */
+.btn {
+    border: 1px solid #000; /* Black border */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+}
+
+.btn:hover {
+    background-color: #000; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+}
+
+/* Bootstrap zoom effect on image hover */
+.card-img-top {
+    transition: transform 0.3s; /* Smooth transition effect */
+}
+
+.card-img-top:hover {
+    transform: scale(1.1); /* Zoom in effect on hover */
+}
