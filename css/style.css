@@ -35,7 +35,7 @@ img {
 }
 
 /* text-align: center */
-:is(h2, footer p) {
+:is(h1, h2, footer p) {
     text-align:center;
     font-family: "Lustria", serif;
     color: #b1825e ;
@@ -135,19 +135,70 @@ nav {
 /* Black border and hover effect for buttons */
 .btn {
     border: 1px solid #000; /* Black border */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+    /* transition: background-color 0.3s, color 0.3s; Smooth transition effect */
+    color: #fff; 
 }
 
 .btn:hover {
     background-color: #000; /* Change background color on hover */
-    color: #fff; /* Change text color on hover */
+    /* Change text color on hover */
 }
 
 /* Bootstrap zoom effect on image hover */
-.card-img-top {
-    transition: transform 0.3s; /* Smooth transition effect */
+/* .card-img-top {
+    transition: transform 0.3s; 
 }
 
 .card-img-top:hover {
-    transform: scale(1.1); /* Zoom in effect on hover */
+    transform: scale(1.1); 
+} */
+
+/* Landing Page */
+.hero {
+    background: url('https://nickisamantha.github.io/allImages/images/pspplp.png') no-repeat center center;
+    background-size: cover ;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.hero h1 {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+.best-sellers {
+    padding: 40px 0;
+}
+
+.best-sellers h1 {
+    margin-bottom: 40px;
+}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* .card img {
+    height: 200px;
+    object-fit: cover; } */
+
+@media (max-width: 767px) {
+    .hero {
+        height: 40vh;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+        padding: 10px;
+    }
+
+    .card img {
+        height: 150px;
+    }
 }
