@@ -1,8 +1,99 @@
 let container = document.querySelector('[ourStore]');
 let searchProduct = document.querySelector('[searchProduct]');
 let sortingByAmount = document.querySelector('[sorting]');
-let products = JSON.parse(localStorage.getItem('products')) || [];
 let checkoutItems = JSON.parse(localStorage.getItem('checkout')) || [];
+
+let wrapper = document.querySelector('[recentProducts]')
+let products =
+    JSON.parse(localStorage.getItem('products'))
+        ? JSON.parse(localStorage.getItem('products'))
+        : localStorage.setItem('products',
+            JSON.stringify(
+                [
+                    {
+                        id: 1,
+                        productName : "Discipline T-shirt",
+                        category: "Vinyl Prints" ,
+                        description: "Women's slimfit T-shirt. 100% Cotton White T-shirt. Size range SS to XXXL. ",
+                        amount : 250.00,
+                        img_url: "https://nickisamantha.github.io/allImages/images/pspp3.jpg" 
+                    },
+                    {
+                        id: 2,
+                        productName : "Best Dad T-shirt",
+                        category : "Vinyl Prints" ,
+                        description: "Men's Round Neck Slimfit T-shirt. Size range SS to XXXL. Colors displayed is colors available.",
+                        amount : 250.00,
+                        img_url: "https://nickisamantha.github.io/allImages/images/pspp4.jpg" 
+                    },
+                    {
+                        id: 3,
+                        productName : "World's #1 DAD Ceremic Mug",
+                        category: "Sublimation" ,
+                        description: "Standard sized ceremic mug with a sublimation print.",
+                        amount: 150.00,
+                        img_url: "https://nickisamantha.github.io/allImages/images/pspp1.jpg" 
+                    },
+                    {
+                        id: 4,
+                        productName : "Dad est'20 Tumbler",
+                        category: "Sublimation" ,
+                        description: "1L insulated tumbler with a sublimation print. Perfect all year round. ",
+                        amount: 350.00,
+                        img_url: "https://nickisamantha.github.io/allImages/images/pspp2.jpg" 
+                    },
+                    {
+                        id: 5,
+                        productName : "Girl Boss Tumbler",
+                        category: "Sublimation" ,
+                        description: "250ml insulated tumbler with a sublimation print. Perfect all year round.",
+                        amount : 300.00,
+                        img_url: "https://nickisamantha.github.io/allImages/images/pspp5.jpg" 
+                    },
+                    {
+                        id: 6,
+                        productName : "Be Kind Keyring",
+                        category : "Sublimation" ,
+                        description : "White polymer keyrings with sublimation print on it.",
+                        amount : 30.00,
+                        img_url : "https://nickisamantha.github.io/allImages/images/pspp10.jpg" 
+                    },
+                    {
+                        id: 7,
+                        productName : "Positive Mind Keyring",
+                        category : "Sublimation" ,
+                        description : "White polymer keyrings with sublimation print on it.",
+                        amount : 30.00,
+                        img_url : "https://nickisamantha.github.io/allImages/images/pspp8.jpg" 
+                    },
+                    {
+                        id: 8,
+                        productName : "Pray more Keyring",
+                        category : "Sublimation" ,
+                        description : " White polymer keyrings with sublimation print on it.",
+                        amount : 30.00,
+                        img_url : "https://nickisamantha.github.io/allImages/images/pspp9.jpg" 
+                    },
+                    {
+                        id: 9,
+                        productName : "Always choose joy Keyring",
+                        category : "Sublimation" ,
+                        description : "White polymer keyrings with sublimation print on it.",
+                        amount : 30.00,
+                        img_url : "https://nickisamantha.github.io/allImages/images/pspp7.jpg" 
+                    },
+                    {
+                        id: 10,
+                        productName : "Focus on the good Keyring",
+                        category : "Sublimation" ,
+                        description : "White polymer keyrings with sublimation print on it.",
+                        amount : 30.00,
+                        img_url : "https://nickisamantha.github.io/allImages/images/pspp6.jpg" 
+                    }
+                ]
+            )
+        )
+
 
 // Current year
 document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear();
@@ -12,16 +103,16 @@ function displayProducts(productsArray) {
     try {
         productsArray.forEach(product => {
             container.innerHTML += `
-                <div class="col-sm-4">
-                    <img src="${product.img_url}" class="card-img-top" alt="${product.productName}" loading='lazy'>
+                <div class="col-sm-2">
+                    <img src="${product.img_url}" class="card-img-top pt-4" alt="${product.productName}" loading='lazy'>
                     <div class="card-body">
                         <h5 class="card-title">${product.productName}</h5>
-                        <p class="card-text">${product.description}</p>
+                        <p class="description card-text">${product.description}</p>
                         <p class="card-text">
                             <span class=" fw-bold">Amount</span>
                             R${product.amount}
                         </p>
-                        <button type='button' class="btn" onclick='addToCart(${JSON.stringify(product)})'>Add to cart</button>
+                        <button type='button' class="btn btn-light " onclick='addToCart(${product.id})'>Add to Cart</button>
                     </div>
                 </div>
             `;
@@ -86,96 +177,4 @@ window.onload = () => {
 }
 
 
-// if (typeof(Storage) !== "undefined") {
-//     let container = document.getElementById('ourStore');
-//     let searchProduct = document.getElementById('searchProduct');
-//     let sortingByAmount = document.getElementById('sorting');
-//     let products = JSON.parse(localStorage.getItem('products')) || [];
-//     let checkoutItems = JSON.parse(localStorage.getItem('checkout')) || [];
-
-//     // Current year
-//     document.getElementById('currentYear').textContent = new Date().getUTCFullYear();
-
-//     function displayProducts(productsArray) {
-//         container.innerHTML = "";
-//         try {
-//             productsArray.forEach(product => {
-//                 container.innerHTML += `
-//                     <div class="col-sm-4">
-//                         <img src="${product.img_url}" class="card-img-top" alt="${product.productName}" loading='lazy'>
-//                         <div class="card-body">
-//                             <h5 class="card-title">${product.productName}</h5>
-//                             <p class="card-text">${product.description}</p>
-//                             <p class="card-text">
-//                                 <span class="shadow text-success fw-bold">Amount</span>
-//                                 R${product.amount}
-//                             </p>
-//                             <button type='button' class="btn btn-success" onclick='addToCart(${JSON.stringify(product)})'>Add to cart</button>
-//                         </div>
-//                     </div>
-//                 `;
-//             });
-
-//             if (productsArray.length === 0) {
-//                 container.textContent = "No products found.";
-//             }
-//         } catch (e) {
-//             container.textContent = "Please try again later.";
-//         }
-//     }
-//     displayProducts(products);
-
-//     searchProduct.addEventListener('keyup', () => {
-//         try {
-//             let searchValue = searchProduct.value.toLowerCase();
-//             if (searchValue.length < 1) {
-//                 displayProducts(products);
-//                 return;
-//             }
-//             let filteredProducts = products.filter(product => product.productName.toLowerCase().includes(searchValue));
-//             displayProducts(filteredProducts);
-//             if (filteredProducts.length === 0) {
-//                 throw new Error(`${searchProduct.value} was not found.`);
-//             }
-//         } catch (e) {
-//             container.textContent = e.message || 'Please try again later';
-//         }
-//     });
-
-//     let isToggle = false;
-//     sortingByAmount.addEventListener('click', () => {
-//         try {
-//             if (!products) throw new Error('Please try again later');
-//             if (!isToggle) {
-//                 products.sort((a, b) => b.amount - a.amount);
-//                 sortingByAmount.textContent = 'Sorted by highest amount';
-//             } else {
-//                 products.sort((a, b) => a.amount - b.amount);
-//                 sortingByAmount.textContent = 'Sorted by lowest amount';
-//             }
-//             isToggle = !isToggle;
-//             displayProducts(products);
-//         } catch (e) {
-//             container.textContent = e.message || 'We are working on this issue';
-//         }
-//     });
-
-//     function addToCart(product) {
-//         try {
-//             checkoutItems.push(product);
-//             localStorage.setItem('checkout', JSON.stringify(checkoutItems));
-//             let counter = document.getElementById('counter');
-//             if (counter) counter.textContent = checkoutItems.length || 0;
-//         } catch (e) {
-//             alert("Unable to add to cart");
-//         }
-//     }
-
-//     window.onload = () => {
-//         let counter = document.getElementById('counter');
-//         if (counter) counter.textContent = checkoutItems.length || 0;
-//     }
-// } else {
-//     alert("Sorry, your browser does not support Web Storage. Please use a modern browser.");
-// }
 

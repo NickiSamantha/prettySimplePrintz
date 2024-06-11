@@ -99,11 +99,12 @@ function recentProducts() {
         latestProducts.forEach(product => {
             wrapper.innerHTML += `
             
-            <div class="col-md-6">
+            <div class="col-md-4 pt-4 pb-4">
+            
             <img src="${product.img_url}" class="card-img-top" alt="${product.productName}" loading='lazy'>
-            <div class="card-body">
-                <h5 class="card-title">${product.productName}</h5>
-                <p class="card-text">${product.description}</p>
+            <div class="card-body text-center">
+                <h4 class="card-title">${product.productName}</h4>
+                 
             </div>
             </div>
     `
@@ -124,3 +125,4 @@ window.onload = () => {
         ? JSON.parse(localStorage.getItem('checkout')).length
         : 0
 }
+
