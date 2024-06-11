@@ -120,38 +120,6 @@ nav {
       font-size: 0.8rem; 
     }
   }
-  /* Products Page */
- /* Styles for search bar and sorting button */
-#searchProduct,
-#sorting {
-    margin-bottom: 20px;
-}
-
-/* Padding at the bottom before the footer */
-.container {
-    padding-bottom: 20px; /* Adjust the padding as needed */
-}
-
-/* Black border and hover effect for buttons */
-.btn {
-    border: 1px solid #000; /* Black border */
-    /* transition: background-color 0.3s, color 0.3s; Smooth transition effect */
-    color: #fff; 
-}
-
-.btn:hover {
-    background-color: #000; /* Change background color on hover */
-    /* Change text color on hover */
-}
-
-/* Bootstrap zoom effect on image hover */
-/* .card-img-top {
-    transition: transform 0.3s; 
-}
-
-.card-img-top:hover {
-    transform: scale(1.1); 
-} */
 
 /* Landing Page */
 .hero {
@@ -184,9 +152,6 @@ footer {
     text-align: center;
 }
 
-/* .card img {
-    height: 200px;
-    object-fit: cover; } */
 
 @media (max-width: 767px) {
     .hero {
@@ -201,4 +166,28 @@ footer {
     .card img {
         height: 150px;
     }
+
 }
+/*Checkout CSS*/
+.edit {
+    background-color: #ddc098;
+    border-color: #3f3f3e;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    box-shadow: #3f3f3e;
+
+}
+.delete {
+    background-color: #d9534f;
+    border-color: #413f3f;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    box-shadow: #3f3f3e;
+}
+
+
+

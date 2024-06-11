@@ -54,11 +54,12 @@
                 <a class="nav-link" href="./products.html">Store</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./checkout.html"
-                  >Checkout
-                  <span class="badge rounded-pill bg-dark" counter> 0 </span>
+                <a class="nav-link" href="./checkout.html">Checkout
+                    <span class="badge rounded-pill bg-dark" counter>
+                        0
+                    </span>
                 </a>
-              </li>
+            </li>
               <li class="nav-item">
                 <a class="nav-link" href="./admin.html">Admin</a>
               </li>
@@ -76,7 +77,55 @@
                 CHECKOUT
             </h2>
         </div>
-        <div class="row gap-2 justify-content-center" recentProducts></div>
+       <!-- Bootstrap Alert -->
+    <div class="alert alert-success alert-dismissible fade" role="alert" id="thankYouAlert" style="display: none;">
+        Thank you for purchasing!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="container" ourStore>
+    
+    </div>
+
+  
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Qty</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody id="checkoutBody">
+            
+        </tbody>
+    </table>
+    <div id="orderTotal">
+        <p>Total: <span id="totalAmount">0.00</span></p>
+        <button id="clearBtn" class="btn btn-light">Clear Cart</button>
+        <button id="payNowBtn" class="paynow btn btn-light"data-toggle="modal" data-target="#thankYouModal">Pay Now</button>
+        
+    </div>
+  
+<div class="modal fade" id="paymentSuccessModal" tabindex="-1" aria-labelledby="paymentSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentSuccessModalLabel">Payment Successful</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Thank you for your payment!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     </main>
 
     
