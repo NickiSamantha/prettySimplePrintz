@@ -14,6 +14,8 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,72 +24,104 @@
    <title>Contact</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html">
-                <img src="https://nickisamantha.github.io/allImages/images/psplogo.png" alt="logo" loading="lazy">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-custom">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../index.html">
+        <img
+          src="https://nickisamantha.github.io/allImages/images/psplogo.png"
+          alt="logo"
+          loading="lazy"
+        />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./products.html">Store</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./checkout.html"
+              >Checkout
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link " href="../index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./products.html">Store</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./checkout.html">Checkout
-                            <span class="badge rounded-pill bg-success" counter>
-                                0
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./admin.html">Admin</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container mt-5">
-        <h1>Contact Us</h1>
-        <div class="alert alert-success alert-dismissible fade" role="alert" id="successAlert" style="display: none;">
-            Thank you for contacting us! We will get back to you soon.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-        <form id="contactForm">
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./admin.html">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main class="contactPage">
+    <h1>Get in touch with us ! </h1>
+    <p class="text-center">For any personalized item please fill out the form below and submit your insperation pictures. </p>
+   <div class="contactSection container row d-flex m-auto justify-content-center">
+    <div class="col-md-6 m-auto ">
+        <form  id="contactForm" action="https://formspree.io/f/xpzvvdge"
+          method="POST" target="_blank">
             <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" required>
+                <label for="name" class="form-label" >Full Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter Full Name" required>
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" required>
+                <label for="email" class="form-label" >Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email address" required>
             </div>
             <div class="mb-3">
                 <label for="message" class="form-label">Message</label>
-                <textarea class="form-control" id="message" rows="3" required></textarea>
+                <textarea class="form-control" id="message" rows="3" placeholder="For customizations specify the following : size, color and measurements for the desired print. 
+Be sure to add length and height in cm's." required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="mb-3">
+                <label for="attachment" class="form-label">Your Image </label>
+                <input type="file" name="upload" class="form-control" id="attachment" accept="image/*">
+            </div>
+
+            <button type="submit" class="btn btn-light">Submit</button>
+            <button type="button" class="btn btn-light" id="clearBtn">Clear</button>
         </form>
     </div>
+    <div class="contact-card col-md-2 m-auto">
+        <h1>Reach Us</h1>
+        <p class="contact-details">
+            <p><strong>Phone:</strong> </p>
+            <p>067-775-8935</p>
+            <p><strong>Location:</strong> </p> <p>Retreat, Cape Town ,</p>  
+                <p>Western Cape , South Africa.</p>
+            </p>
+        </p>
+        <ul class="social-icons">
+          <li><a href="https://www.facebook.com/nickisamantha.abels/" class="btn btn-light" target="_blank"><i
+                class="fa-brands fa-facebook"></i></a></li>
+          <li><a href="https://www.instagram.com/nicki__samantha/" class="btn btn-light" target="_blank"><i
+                class="fab fa-instagram"></i></a></li>
+          <li><a href="https://www.tiktok" class="btn btn-light" target="_blank"><i class="fa-brands fa-tiktok"></i></a></li>  
+        </ul>
 
-   
-    <!-- JavaScript to handle form submission -->
+      </div>
+   </div>
+
+  </main>
     
-    <footer class="container-fluid sticky-bottom">
+    <footer class="bottom container-fluid">
         <div class="row">
             <p class="lead">Copyright &copy;
                 <span currentYear></span>
@@ -104,22 +138,9 @@
     <script>
         // Current year
         document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear()
-        // Counter
-        window.onload = () => {
-            document.querySelector('[counter]').textContent = JSON.parse(localStorage.getItem('checkout'))
-                ? JSON.parse(localStorage.getItem('checkout')).length
-                : 0
-        }
-        
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            // Display the success alert
-            document.getElementById('successAlert').style.display = 'block';
-
-            // Clear the form fields
-            document.getElementById('contactForm').reset();
-        });
+        document.getElementById('clearBtn').addEventListener('click', function() {
+    document.getElementById('contactForm').reset();
+});
 
     </script>
   </body>

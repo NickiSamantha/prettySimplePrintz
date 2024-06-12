@@ -14,6 +14,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    
     <!--Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,7 +66,93 @@
                 ADMIN
             </h2>
         </div>
-        <div class="row gap-2 justify-content-center" recentProducts></div>
+        <!-- <div class="row gap-2 justify-content-center" recentProducts></div> -->
+        <div class="container mt-5">
+          <h1>Manage Products</h1>
+          <div class="row mb-3">
+              <div class="col-sm-4" data-ourStore>
+                  <input type="text" class="form-control" placeholder="Search Products" data-searchProduct/>
+              </div>
+              <div class="col-sm-4">
+                  <button class="btn btn-light" id="sortButton" data-sorting>Sort by Amount</button>
+              </div>
+              <div class="col-sm-4 text-right">
+                  <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#productModal">Add New Product</button>
+              </div>
+          </div>
+          <table class="table table-bordered">
+              <thead>
+                  <tr>
+                      <th>Product Name</th>
+                      <th>Image</th>
+                      <th>Category</th>
+                      <th>Price</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody id="productTableBody">
+                  <!-- Product rows will be added here by JavaScript -->
+              </tbody>
+          </table>
+      </div>
+  
+      <!-- Modal for Adding/Editing Products -->
+      <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="productModalLabel">Add New Product</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                      
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <form id="productForm">
+                          <div class="mb-3">
+                              <label for="productName" class="form-label">Product Name</label>
+                              <input type="text" class="form-control" id="productName" required>
+                          </div>
+                          <div class="mb-3">
+                              <label for="productCategory" class="form-label">Category</label>
+                              <input type="text" class="form-control" id="productCategory" required>
+                          </div>
+                          <div class="mb-3">
+                              <label for="productDescription" class="form-label">Description</label>
+                              <textarea class="form-control" id="productDescription" required></textarea>
+                          </div>
+                          <div class="mb-3">
+                              <label for="productAmount" class="form-label">Price</label>
+                              <input type="number" class="form-control" id="productAmount" step="0.01" required>
+                          </div>
+                          <div class="mb-3">
+                              <label for="productImage" class="form-label">Image URL</label>
+                              <input type="text" class="form-control" id="productImage" required>
+                          </div>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-dark" id="saveProductBtn">Save Product</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Product Added</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                      
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Product added successfully!
+                </div>
+            </div>
+        </div>
+    </div>
+
     </main>
 
     <footer class="container-fluid sticky-bottom">
@@ -82,6 +169,6 @@
       crossorigin="anonymous"
     ></script>
     <!--Custom Script-->
-    <script src="./script/code.js"></script>
+    <script src="../script/admin.js"></script>
   </body>
 </html>

@@ -2,8 +2,8 @@ let container = document.querySelector('[ourStore]');
 let searchProduct = document.querySelector('[searchProduct]');
 let sortingByAmount = document.querySelector('[sorting]');
 let checkoutItems = JSON.parse(localStorage.getItem('checkout')) || [];
-
 let wrapper = document.querySelector('[recentProducts]')
+let counterElement = document.querySelector('[counter]');
 let products =
     JSON.parse(localStorage.getItem('products'))
         ? JSON.parse(localStorage.getItem('products'))
@@ -94,7 +94,10 @@ let products =
             )
         )
 
-
+// Save default products to localStorage if not already present
+if (!localStorage.getItem('products')) {
+    localStorage.setItem('products', JSON.stringify(products));
+}
 // Current year
 document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear();
 
@@ -177,9 +180,8 @@ function addToCart(productId) {
                 checkoutItems.push(product);
             }
             localStorage.setItem('checkout', JSON.stringify(checkoutItems));
-            document.querySelector('[counter]').textContent = checkoutItems.length || 0;
-            // Update the checkout table
-            updateCheckoutTable();
+        
+            updateCounter();
         } else {
             throw new Error("Product not found");
         }
@@ -188,10 +190,12 @@ function addToCart(productId) {
     }
 }
 
+// Function to update cart counter
+function updateCounter() {
+    let totalItems = checkoutItems.reduce((sum, item) => sum + item.qty, 0);
+    counterElement.textContent = totalItems;
+}
 
 window.onload = () => {
     document.querySelector('[counter]').textContent = checkoutItems.length || 0;
 }
-
-
-

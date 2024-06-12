@@ -1,1 +1,185 @@
-document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear()
+// Select elements using querySelector
+let container = document.querySelector('[data-ourStore]');
+let searchProduct = document.querySelector('[data-searchProduct]');
+let sortingByAmount = document.querySelector('[data-sorting]');
+let checkoutItems = JSON.parse(localStorage.getItem('checkout')) || [];
+
+let wrapper = document.querySelector('[data-recentProducts]');
+let products = JSON.parse(localStorage.getItem('products')) || [];
+
+// Current year
+document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear();
+
+// Function to display products in the admin table
+function displayProducts(productsArray) {
+    let productTableBody = document.querySelector('#productTableBody');
+    productTableBody.innerHTML = '';
+    productsArray.forEach((product, index) => {
+        if (product.amount !== null){
+            productTableBody.innerHTML += `
+            <tr>
+                <td>${product.productName}</td>
+                <td><img src="${product.img_url}" alt="${product.productName}" class="img-fluid" style="max-width: 100px;"></td>
+                <td>${product.category}</td>
+                <td>R${product.amount.toFixed(2)}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editProduct(${index})">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteProduct(${index})">Delete</button>
+                </td>
+            </tr>
+        `;
+        } else {
+            console.log(`Product ${product.productName} has no amount`)
+        }
+        
+    });
+
+    if (productsArray.length === 0) {
+        productTableBody.innerHTML = "<tr><td colspan='5'>No products found.</td></tr>";
+    }
+}
+
+// Function to add a new product
+function addProduct() {
+    let productName = document.querySelector('#productName').value;
+    let productCategory = document.querySelector('#productCategory').value;
+    let productDescription = document.querySelector('#productDescription').value;
+    let productAmount = document.querySelector('#productAmount').value;
+    let productImage = document.querySelector('#productImage').value;
+
+    let newProduct = {
+        id: products.length + 1,
+        productName: productName,
+        category: productCategory,
+        description: productDescription,
+        amount: parseFloat(productAmount),
+        img_url: productImage
+    };
+
+    products.push(newProduct);
+    localStorage.setItem('products', JSON.stringify(products));
+    displayProducts(products);
+    document.querySelector('#productForm').reset();
+    let successModal = new bootstrap.Modal(getElementById('successModal'));
+    let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+    productModal.hide();
+    successModal.show();
+     // Redirect to admin page after 2 seconds
+     setTimeout(() => {
+        successModal.hide();
+        window.location.href = 'admin.html';
+    }, 2000);
+}
+
+// Function to edit a product
+function editProduct(index) {
+    let product = products[index];
+    document.querySelector('#productName').value = product.productName;
+    document.querySelector('#productCategory').value = product.category;
+    document.querySelector('#productDescription').value = product.description;
+    document.querySelector('#productAmount').value = product.amount;
+    document.querySelector('#productImage').value = product.img_url;
+
+    document.querySelector('#saveProductBtn').innerText = 'Update Product';
+    document.querySelector('#saveProductBtn').onclick = function() {
+        updateProduct(index);
+    };
+    let productModal = new bootstrap.Modal(document.getElementById('productModal'));
+    productModal.show();
+}
+
+// Function to update a product
+function updateProduct(index) {
+    products[index].productName = document.querySelector('#productName').value;
+    products[index].category = document.querySelector('#productCategory').value;
+    products[index].description = document.querySelector('#productDescription').value;
+    products[index].amount = parseFloat(document.querySelector('#productAmount').value);
+    products[index].img_url = document.querySelector('#productImage').value;
+
+    localStorage.setItem('products', JSON.stringify(products));
+    displayProducts(products);
+    document.querySelector('#productForm').reset();
+    document.querySelector('#saveProductBtn').innerText = 'Save Product';
+    document.querySelector('#saveProductBtn').onclick = addProduct;
+    let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+    productModal.hide();
+}
+
+
+// Function to delete a product
+function deleteProduct(index) {
+    products.splice(index, 1);
+    localStorage.setItem('products', JSON.stringify(products));
+    displayProducts(products);
+}
+
+// Function to sort products by amount
+let isToggle = false;
+function sortProducts() {
+    if (!products) {
+        alert('Please try again later');
+        return;
+    }
+    if (!isToggle) {
+        products.sort((a, b) => b.amount - a.amount);
+        sortingByAmount.textContent = 'Sorted by highest amount';
+    } else {
+        products.sort((a, b) => a.amount - b.amount);
+        sortingByAmount.textContent = 'Sorted by lowest amount';
+    }
+    isToggle = !isToggle;
+    displayProducts(products);
+}
+
+// Function to handle product search
+searchProduct.addEventListener('keyup', () => {
+    try {
+        let searchValue = searchProduct.value.toLowerCase();
+        if (searchValue.length < 1) {
+            displayProducts(products);
+            return;
+        }
+        let filteredProducts = products.filter(product => product.productName.toLowerCase().includes(searchValue));
+        displayProducts(filteredProducts);
+        if (filteredProducts.length === 0) {
+            throw new Error(`${searchProduct.value} was not found.`);
+        }
+    } catch (e) {
+        container.textContent = e.message || 'Please try again later';
+    }
+});
+
+// Function to add a product to the cart
+function addToCart(productId) {
+    try {
+        let product = products.find(p => p.id === productId);
+        if (product) {
+            let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
+            if (existingItemIndex !== -1) {
+                checkoutItems[existingItemIndex].qty += 1;
+            } else {
+                product.qty = 1;
+                checkoutItems.push(product);
+            }
+            localStorage.setItem('checkout', JSON.stringify(checkoutItems));
+            document.querySelector('[counter]').textContent = checkoutItems.length || 0;
+            updateCheckoutTable();
+        } else {
+            throw new Error("Product not found");
+        }
+    } catch (e) {
+        console.error("Unable to add to cart:", e);
+    }
+}
+
+// Event listeners
+document.querySelector('#saveProductBtn').addEventListener('click', addProduct);
+document.querySelector('#sortButton').addEventListener('click', sortProducts);
+
+// On window load, update the cart counter and display products
+window.onload = () => {
+    document.querySelector('[counter]').textContent = checkoutItems.length || 0;
+    displayProducts(products);
+}
+
+
