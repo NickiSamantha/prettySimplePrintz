@@ -5,6 +5,7 @@ let checkoutTable = document.getElementById('checkoutBody');
 let totalAmountElement = document.getElementById('totalAmount');
 let payNowBtn = document.getElementById('payNowBtn');
 let clearBtn = document.getElementById('clearBtn');
+let counterElement = document.getElementById('counter');
 
 // Function to calculate total amount
 function calculateTotalAmount() {
@@ -29,6 +30,12 @@ function updateCheckoutTable() {
          `;
     });
     totalAmountElement.textContent = calculateTotalAmount();
+    updateCounter();
+}
+// Function to update cart counter
+function updateCounter() {
+    let totalItems = checkoutItems.reduce((sum, item) => sum + item.qty, 0);
+    counterElement.textContent = totalItems;
 }
 
 // Function to handle payment
