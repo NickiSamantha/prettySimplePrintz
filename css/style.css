@@ -154,6 +154,10 @@ footer {
 
 
 @media (max-width: 767px) {
+    .hero {
+        height: auto;
+    }
+
     .hero h1 {
         font-size: 1.5rem;
         padding: 10px;
