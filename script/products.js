@@ -178,7 +178,7 @@ function addToCart(productId) {
             }
             localStorage.setItem('checkout', JSON.stringify(checkoutItems));
         
-            updateCheckoutTable();
+            updateCounter();
         } else {
             throw new Error("Product not found");
         }
