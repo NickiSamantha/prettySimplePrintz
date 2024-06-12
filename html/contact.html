@@ -75,6 +75,10 @@
     <p class="text-center">For any personalized item please fill out the form below and submit your insperation pictures. </p>
    <div class="contactSection container row d-flex m-auto justify-content-center">
     <div class="col-md-6 m-auto ">
+
+        <form  id="contactForm" action="https://formspree.io/f/xpzvvdge"
+          method="POST" target="_blank">
+
         <form id="contactForm" class="" action="https://formspree.io/f/mayrkyyb" target="_blank" method="POST">
             <div class="mb-3">
                 <label for="name" class="form-label" >Full Name</label>
@@ -88,11 +92,19 @@
                 <label for="message" class="form-label">Message</label>
                 <textarea class="form-control" id="message" rows="3" placeholder="For customizations specify the following : size, color and measurements for the desired print. 
 Be sure to add length and height in cm's." required></textarea>
+
+            </div>
+            <div class="mb-3">
+                <label for="attachment" class="form-label">Your Image </label>
+                <input type="file" name="upload" class="form-control" id="attachment" accept="image/*">
+            </div>
+
             </div>
             <div class="mb-3">
                 <label for="attachment" class="form-label">Attachment</label>
                 <input type="file" class="form-control" id="attachment" accept="image/*">
             </div>
+
 
             <button type="submit" class="btn btn-light">Submit</button>
             <button type="button" class="btn btn-light" id="clearBtn">Clear</button>
@@ -107,7 +119,6 @@ Be sure to add length and height in cm's." required></textarea>
                 <p>Western Cape , South Africa.</p>
             </p>
         </p>
-        
 
         <ul class="social-icons">
           <li><a href="https://www.facebook.com/nickisamantha.abels/" class="btn btn-light" target="_blank"><i
@@ -139,8 +150,10 @@ Be sure to add length and height in cm's." required></textarea>
     <script>
         // Current year
         document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear()
-        
 
-    </script>
+        document.getElementById('clearBtn').addEventListener('click', function() {
+    document.getElementById('contactForm').reset();
+});
+</script>
   </body>
 </html>

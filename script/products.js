@@ -94,7 +94,10 @@ let products =
             )
         )
 
-
+// Save default products to localStorage if not already present
+if (!localStorage.getItem('products')) {
+    localStorage.setItem('products', JSON.stringify(products));
+}
 // Current year
 document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear();
 
@@ -196,6 +199,3 @@ function updateCounter() {
 window.onload = () => {
     document.querySelector('[counter]').textContent = checkoutItems.length || 0;
 }
-
-
-
