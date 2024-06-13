@@ -22,65 +22,64 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg sticky-top navbar-custom">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="../index.html">
-            <img
-              src="https://nickisamantha.github.io/allImages/images/psplogo.png"
-              alt="logo"
-              loading="lazy"
-            />
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="../index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./about.html">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./products.html">Store</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./checkout.html"
-                  >Checkout
-                  <span class="badge rounded-pill bg-dark" counter> 0 </span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./admin.html">Admin</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./contact.html">Contact</a>
-              </li>
-            </ul>
-          </div>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">
+          <img
+            src="https://nickisamantha.github.io/allImages/images/psplogo.png"
+            alt="logo"
+            loading="lazy"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./products.html">Store</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./checkout.html"
+                >Checkout
+                <span class="badge rounded-pill bg-dark" counter> 0 </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./admin.html">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./contact.html">Contact</a>
+            </li>
+          </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
 
       <main class="container-fluid">
         <div class="row">
-            <h2 class="display-2">
-                ADMIN
-            </h2>
+            <h2 class="display-2">ADMIN DASHBOARD</h2>
         </div>
-       <div class="container mt-5">
+       <div class="container mt-3">
           <h1>Manage Products</h1>
           <div class="row mb-3">
               <div class="col-sm-4" data-ourStore>
-                  <input type="text" class="form-control" placeholder="Search Products" data-searchProduct/>
-              </div>
+                 <input type="text" class="form-control" placeholder="Search Products" data-searchProduct/>
+                 <div class="invalid-feedback">Please enter a valid search term</div> 
+                </div>
               <div class="col-sm-4">
                   <button class="btn btn-light" id="sortButton" data-sorting>Sort by Amount</button>
               </div>
@@ -88,27 +87,32 @@
                   <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#productModal">Add New Product</button>
               </div>
           </div>
-          <table class="table table-bordered">
+          <div class="table-responsive">
+             <table class="table table-bordered">
               <thead>
                   <tr>
-                      <th>Product Name</th>
-                      <th>Image</th>
-                      <th>Category</th>
-                      <th>Price</th>
-                      <th>Actions</th>
+                      <th data-label> ID</th>
+                      <th data-label>Product Name</th>
+                      <th data-label>Image</th>
+                      <th data-label>Category</th>
+                      <th data-label>Price</th>
+                      <th data-label>Actions</th>
                   </tr>
               </thead>
               <tbody id="productTableBody">
                   <!-- Product rows will be added here by JavaScript -->
               </tbody>
           </table>
+          </div> 
+          
       </div>
   
       <!-- Modal for Adding/Editing Products -->
+    
       <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
           <div class="modal-dialog">
               <div class="modal-content">
-                  <div class="modal-header">
+                  <div class="modal-header ">
                       <h5 class="modal-title" id="productModalLabel">Add New Product</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                       
@@ -139,8 +143,7 @@
                       </form>
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-dark" id="saveProductBtn">Save Product</button>
+                     <button type="button" class="btn btn-dark" id="saveProductBtn" data-bs-dismiss="modal">Save Product</button>
                   </div>
               </div>
           </div>
