@@ -1,4 +1,5 @@
-let container = document.querySelector('[ourStore]');
+let container = document.querySelector('[#ourStore]');
+let spinner = document.querySelector('#spinner');
 let searchProduct = document.querySelector('[searchProduct]');
 let sortingByAmount = document.querySelector('[sorting]');
 let filterCategory = document.querySelector('[filterCategory]');
@@ -109,7 +110,7 @@ document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear(
 // container.appendChild(spinner);
 function displayProducts(productsArray) {
     container.innerHTML = "";
-       // spinner.style.display = "block" ; 
+        spinner.style.display = "block" ; 
     try {
         productsArray.forEach(product => {
             container.innerHTML += `
@@ -134,11 +135,11 @@ function displayProducts(productsArray) {
     } catch (e) {
         container.textContent = "Please contact the administrator.";
     }
-    // finally {
-    //     setTimeout( () => {
-    //     spinner.style.display = "none" ; 
-    //     }, 100 );
-    // }
+       finally {
+        setTimeout( () => {
+        spinner.style.display = "none" ; 
+        }, 100 );
+        }
 }
 
 displayProducts(products);
