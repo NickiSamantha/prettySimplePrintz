@@ -27,6 +27,26 @@
     }
 }
 
+/* Default link style */
+.nav-link {
+  color: #060606; /* Default link color */
+  text-decoration: none; /* Remove underline */
+}
+
+/* Hover state */
+.nav-link:hover {
+  color: #007bff; /* Color when hovering */
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Active state */
+.nav-link:active {
+  color: #a8a291; /* Color when the link is active */
+  text-decoration: underline; /* Underline when active */
+}
+
+
+
 /* All the images */
 img {
     aspect-ratio: 1;
@@ -288,3 +308,40 @@ footer {
     
 }
 
+/*Product Page*/
+/* .search {
+  border: 1px solid #cca07d;
+  border-radius: 10px;
+  padding: 1rem;
+} */
+.search {
+  border: 1px solid #cca07d;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.search p {
+  margin: 0.5rem 0;
+}
+
+.search .form-control,
+.search .form-select,
+.search .btn {
+  margin-bottom: 0.5rem;
+}
+
+.search .form-control,
+.search .form-select {
+  border: 1px solid #cca07d;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.search .btn {
+  background-color: #b1825e;
+  border: none;
+}
+
+.search .btn:hover {
+  background-color: #966b50;
+}

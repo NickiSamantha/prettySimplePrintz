@@ -14,9 +14,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <!--Font Awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!--Google Fonts -->
+  <!--Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lustria&display=swap" rel="stylesheet">
@@ -63,22 +61,27 @@
     </nav>
 
       <main class="container-fluid">
-        <div class="row">
+        <div class="row pb-4">
             <h2 class="display-2">
-                STORE
+                WELCOME TO OUR STORE
             </h2>
         </div> 
-        <div class="row gap-4 justify-content-center">
-            <input type="text" class="form-control" placeholder="Search Products" searchProduct>
-            <button class="btn btn-light" sorting >Sort by Amount</button>
+        <div class="search row col-sm-8 m-auto d-flex  justify-content-center">
+            <p>Search Products : </p>
+            <input type="text" class="form-control" placeholder="Enter product name" searchProduct>
+            <p>Sort by highest or lowest amount :</p>
+            <button class="btn btn-dark" sorting >Sort</button>
+            <p>Filter by Category : </p>
+            <select class="form-select" filterCategory>
+                <option value="all">All Categories</option>
+                <option value="Vinyl Prints">Vinyl Prints</option>
+                <option value="Sublimation">Sublimation</option>
+            </select>
         </div>
        
         <div class="row gap-4 justify-content-center" ourStore>
             
         </div> 
-
-        <!-- <input type="text" id="searchProduct" placeholder="Search Products">
-    <button id="sorting">Sort by Amount</button> -->
 
     <div class="row gap-4 justify-content-center pb-4" id="ourStore"></div>
 

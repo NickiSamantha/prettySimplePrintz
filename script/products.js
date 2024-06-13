@@ -1,6 +1,7 @@
 let container = document.querySelector('[ourStore]');
 let searchProduct = document.querySelector('[searchProduct]');
 let sortingByAmount = document.querySelector('[sorting]');
+let filterCategory = document.querySelector('[filterCategory]');
 let checkoutItems = JSON.parse(localStorage.getItem('checkout')) || [];
 let wrapper = document.querySelector('[recentProducts]')
 let counterElement = document.querySelector('[counter]');
@@ -165,17 +166,29 @@ sortingByAmount.addEventListener('click', () => {
     }
 });
 
+filterCategory.addEventListener('change', () => {
+    try {
+        let selectedCategory = filterCategory.value;
+        if (selectedCategory === "all") {
+            displayProducts(products);
+            return;
+        }
+        let filteredProducts = products.filter(product => product.category === selectedCategory);
+        displayProducts(filteredProducts);
+    } catch (e) {
+        container.textContent = e.message || 'Please try again later';
+    }
+});
+
 function addToCart(productId) {
     try {
         let product = products.find(p => p.id === productId);
         if (product) {
-            // Check if the product is already in the cart
+           
             let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
             if (existingItemIndex !== -1) {
-                // If the product is already in the cart, increase its quantity
                 checkoutItems[existingItemIndex].qty += 1;
             } else {
-                // If the product is not in the cart, add it with quantity 1
                 product.qty = 1;
                 checkoutItems.push(product);
             }
