@@ -190,11 +190,14 @@ function addToCart(productId) {
     try {
         let product = products.find(p => p.id === productId);
         if (product) {
-            let existingItem = checkoutItems.find(item => item.id === productId);
-            if (existingItem) {
-                existingItem.qty++;
+            // Check if the product already exists in checkoutItems
+            let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
+            if (existingItemIndex !== -1) {
+                // If the product already exists, increment its quantity
+                checkoutItems[existingItemIndex].qty++;
             } else {
-                let newItem = {...product, qty: 1};
+                // If the product doesn't exist, add it to checkoutItems
+                let newItem = { ...product, qty: 1 };
                 checkoutItems.push(newItem);
             }
             localStorage.setItem('checkout', JSON.stringify(checkoutItems));
@@ -207,6 +210,7 @@ function addToCart(productId) {
     }
 }
 
+
 // cart counter
 function updateCounter() {
     let totalItems = 0;
@@ -214,12 +218,6 @@ function updateCounter() {
         totalItems += item.qty;
     });
     counterElement.textContent = `Cart (${totalItems})`;
-    // Display the quantity of each item in the cart
-    let cartHTML = "";
-    checkoutItems.forEach(item => {
-        cartHTML += `${item.productName} x ${item.qty}<br>`;
-    });
-    document.querySelector('[cart-items]').innerHTML = cartHTML;
 }
 
 
