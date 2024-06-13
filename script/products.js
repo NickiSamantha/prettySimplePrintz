@@ -193,8 +193,7 @@ function addToCart(productId) {
              let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
             if (existingItemIndex !== -1) {
                let existingItem = checkoutItems[existingItemIndex];
-                let newItem = { ...product, qty:1};
-                checkoutItems.push(newItem);
+                 existingItem.qty += 1;
             } else {
            let newItem = { ...product, qty: 1};
             checkoutItems.push(newItem);
@@ -222,7 +221,7 @@ window.onload = () => {
     checkoutItems.forEach(item => {
         totalItems += item.qty;
     });
-    document.querySelector('[counter]').textContent = checkoutItems.length || 0;
+    document.querySelector('[counter]').textContent = totalItems;
 }
 
 
