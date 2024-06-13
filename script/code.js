@@ -103,7 +103,7 @@ function recentProducts() {
             <img src="${product.img_url}" class="card-img-top" alt="${product.productName}" loading='lazy'>
             <div class="card-body text-center">
                 <h4 class="card-title pt-4">${product.productName}</h4>
-                <button class="btn btn-primary view-product-btn" data-id="${product.id}">View Product</button>
+                <button class="btn btn-light view-product-btn mt-3" data-id="${product.id}">View Product</button>
 
             </div>
             </div>
@@ -128,7 +128,7 @@ window.onload = () => {
 wrapper.addEventListener('click', (e) => {
   if (e.target.classList.contains('view-product-btn')) {
     const productId = e.target.dataset.id;
-    window.location.href = `/products/${productId}`;
+    window.location.href = `https://pretty-simple-printz.vercel.app/html/products.html`;
   }
 })
 
