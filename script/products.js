@@ -101,9 +101,15 @@ if (!localStorage.getItem('products')) {
 }
 // Current year
 document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear();
-
+//spinner
+let spinner = document.createElement('div');
+spinner.className = 'pinner-border text-primary';
+spinner.role = 'tatus';
+spinner.innerHTML = '<span class="sr-only">Loading...</span>';
+container.appendChild(spinner);
 function displayProducts(productsArray) {
     container.innerHTML = "";
+    spinner.style.display = "block" ; 
     try {
         productsArray.forEach(product => {
             container.innerHTML += `
@@ -128,7 +134,11 @@ function displayProducts(productsArray) {
     } catch (e) {
         container.textContent = "Please try again later.";
     }
+    finally {
+        spinner.style.display = "none" ;
+    }
 }
+
 displayProducts(products);
 
 searchProduct.addEventListener('keyup', () => {
@@ -147,6 +157,8 @@ searchProduct.addEventListener('keyup', () => {
         container.textContent = e.message || 'Please try again later';
     }
 });
+
+
 
 let isToggle = false;
 sortingByAmount.addEventListener('click', () => {
@@ -211,5 +223,15 @@ function updateCounter() {
 
 window.onload = () => {
     document.querySelector('[counter]').textContent = checkoutItems.length || 0;
+
+}
+document.addEventListener('DOMContentLoaded', () => {
+    if (!localStorage.getItem('products')) {
+        localStorage.clear();
+        location.reload();
+    }
+});
+
     
 }
+
