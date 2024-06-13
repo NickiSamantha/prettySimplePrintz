@@ -120,15 +120,29 @@ function recentProducts() {
 }
 recentProducts()
 // Counter
-window.onload = () => {
-    document.querySelector('[counter]').textContent = JSON.parse(localStorage.getItem('checkout'))
-        ? JSON.parse(localStorage.getItem('checkout')).length
-        : 0
+function updateCounter() {
+    let totalQuantity = calculateTotalQuantity();
+    document.querySelector('[counter]').textContent = totalQuantity;
 }
-wrapper.addEventListener('click', (e) => {
-  if (e.target.classList.contains('view-product-btn')) {
-    const productId = e.target.dataset.id;
-    window.location.href = `https://pretty-simple-printz.vercel.app/html/products.html`;
-  }
-})
+function addToCart(productId) {
+    try {
+        let product = products.find(p => p.id === productId);
+        if (product) {
+            let newItem = { ...product, qty: 1 };
+            checkoutItems.push(newItem);
+            localStorage.setItem('checkout', JSON.stringify(checkoutItems));
+            updateCounter();
+        } else {
+            throw new Error("Product not found");
+        }
+    } catch (e) {
+        console.error("Unable to add to cart:", e);
+    }
+}
+function clearCart() {
+    localStorage.removeItem('checkout');
+    updateCounter();
+}
+
+
 
