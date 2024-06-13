@@ -194,9 +194,12 @@ function addToCart(productId) {
 document.querySelector('#saveProductBtn').addEventListener('click', addProduct);
 document.querySelector('#sortButton').addEventListener('click', sortProducts);
 
-// On window load, update the cart counter and display products
-window.onload = () => {
-    document.querySelector('[counter]').textContent = checkoutItems.length || 0;
-    displayProducts(products);
-}
-
+//counter
+      window.onload = () => {
+    let totalQuantity = 0;
+    let checkoutItems = JSON.parse(localStorage.getItem("checkout")) || [];
+    checkoutItems.forEach(item => {
+        totalQuantity += item.qty || 0;
+    });
+    document.querySelector("[counter]").textContent = totalQuantity;
+};
