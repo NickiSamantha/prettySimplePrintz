@@ -195,11 +195,13 @@ document.querySelector('#saveProductBtn').addEventListener('click', addProduct);
 document.querySelector('#sortButton').addEventListener('click', sortProducts);
 
 //counter
-      window.onload = () => {
+window.onload = () => {
     let totalQuantity = 0;
     let checkoutItems = JSON.parse(localStorage.getItem("checkout")) || [];
     checkoutItems.forEach(item => {
         totalQuantity += item.qty || 0;
     });
     document.querySelector("[counter]").textContent = totalQuantity;
+    displayProducts(products); 
 };
+
