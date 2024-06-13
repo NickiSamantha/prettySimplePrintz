@@ -103,12 +103,14 @@ function recentProducts() {
             <img src="${product.img_url}" class="card-img-top" alt="${product.productName}" loading='lazy'>
             <div class="card-body text-center">
                 <h4 class="card-title pt-4">${product.productName}</h4>
+                <button class="btn btn-primary view-product-btn" data-id="${product.id}">View Product</button>
+
             </div>
             </div>
     `
         })
     } catch (e) {
-        wrapper.textContent = "Please contact our administrator"
+        wrapper.textContent = "Please contact the administrator"
         setTimeout(() => {
             location.reload()
         },
@@ -123,4 +125,10 @@ window.onload = () => {
         ? JSON.parse(localStorage.getItem('checkout')).length
         : 0
 }
+wrapper.addEventListener('click', (e) => {
+  if (e.target.classList.contains('view-product-btn')) {
+    const productId = e.target.dataset.id;
+    window.location.href = `/products/${productId}`;
+  }
+})
 
