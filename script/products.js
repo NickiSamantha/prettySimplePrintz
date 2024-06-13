@@ -194,12 +194,7 @@ function addToCart(productId) {
             checkoutItems.push(newItem);
             localStorage.setItem('checkout',JSON.stringify(checkoutItems));
             updateCounter();
-        } else {
-            throw new Error("Product not found");
-        }
-    } catch (e) {
-        console.error("Unable to add to cart:", e);
-    }
+       
 
             let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
             if (existingItemIndex !== -1) {
