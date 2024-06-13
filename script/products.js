@@ -209,15 +209,20 @@ function addToCart(productId) {
     }
 }
 
-// Function to update cart counter
+// cart counter
 function updateCounter() {
-    let totalItems = checkoutItems.reduce((sum, item) => sum + item.qty, 0);
+    let totalItems = 0;
+    checkoutItems.forEach(item => { totalItems += item.qty;
+                                  });
     counterElement.textContent = totalItems;
 }
 
 window.onload = () => {
+    let totalItems = 0;
+    checkoutItems.forEach(item => {
+        totalItems += item.qty;
+    });
     document.querySelector('[counter]').textContent = checkoutItems.length || 0;
-
 }
 
 
