@@ -109,7 +109,7 @@ spinner.innerHTML = '<span class="sr-only"></span>';
 container.appendChild(spinner);
 function displayProducts(productsArray) {
     container.innerHTML = "";
-      spinner.style.display = "block" ; 
+       spinner.style.display = "block" ; 
     try {
         productsArray.forEach(product => {
             container.innerHTML += `
@@ -135,7 +135,9 @@ function displayProducts(productsArray) {
         container.textContent = "Please try again later.";
     }
     finally {
-        spinner.style.display = "none" ;
+        setTimeout( () => {
+        spinner.style.display = "none" ; 
+        }, 100 );
     }
 }
 
@@ -225,12 +227,12 @@ window.onload = () => {
     document.querySelector('[counter]').textContent = checkoutItems.length || 0;
 
 }
-document.addEventListener('DOMContentLoaded', () => {
-    if (!localStorage.getItem('products')) {
-        localStorage.clear();
-        location.reload();
-    }
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     if (!localStorage.getItem('products')) {
+//         localStorage.clear();
+//         location.reload();
+//     }
+// });
 
     
 }
