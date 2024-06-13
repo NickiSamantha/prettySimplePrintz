@@ -120,16 +120,20 @@ function recentProducts() {
 }
 recentProducts()
 // Counter
-function updateCounter() {
-    let totalQuantity = calculateTotalQuantity();
-    document.querySelector('[counter]').textContent = totalQuantity;
-}
 function addToCart(productId) {
     try {
         let product = products.find(p => p.id === productId);
         if (product) {
-            let newItem = { ...product, qty: 1 };
-            checkoutItems.push(newItem);
+            // Check if the product already exists in checkoutItems
+            let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
+            if (existingItemIndex !== -1) {
+                // If the product already exists, increment its quantity
+                checkoutItems[existingItemIndex].qty++;
+            } else {
+                // If the product doesn't exist, add it to checkoutItems
+                let newItem = { ...product, qty: 1 };
+                checkoutItems.push(newItem);
+            }
             localStorage.setItem('checkout', JSON.stringify(checkoutItems));
             updateCounter();
         } else {
@@ -139,9 +143,17 @@ function addToCart(productId) {
         console.error("Unable to add to cart:", e);
     }
 }
-function clearCart() {
-    localStorage.removeItem('checkout');
-    updateCounter();
+
+
+
+
+// cart counter
+function updateCounter() {
+    let totalItems = 0;
+    checkoutItems.forEach(item => {
+        totalItems += item.qty;
+    });
+    counterElement.textContent = `${totalItems}`;
 }
 
 
