@@ -1,4 +1,4 @@
-let container = document.querySelector('[#ourStore]');
+let container = document.querySelector('[ourStore]');
 // let spinner = document.querySelector('#spinner');
 let searchProduct = document.querySelector('[searchProduct]');
 let sortingByAmount = document.querySelector('[sorting]');
