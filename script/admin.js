@@ -113,8 +113,6 @@ function updateProduct(index) {
     localStorage.setItem('products', JSON.stringify(products));
     displayProducts(products);
     document.querySelector('#productForm').reset();
-    document.querySelector('#saveProductBtn').innerText = 'Save Product';
-    document.querySelector('#saveProductBtn').onclick = addProduct;
     let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
     productModal.hide();
 }
