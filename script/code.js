@@ -120,41 +120,15 @@ function recentProducts() {
 }
 recentProducts()
 // Counter
-function addToCart(productId) {
-    try {
-        let product = products.find(p => p.id === productId);
-        if (product) {
-            // Check if the product already exists in checkoutItems
-            let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
-            if (existingItemIndex !== -1) {
-                // If the product already exists, increment its quantity
-                checkoutItems[existingItemIndex].qty++;
-            } else {
-                // If the product doesn't exist, add it to checkoutItems
-                let newItem = { ...product, qty: 1 };
-                checkoutItems.push(newItem);
-            }
-            localStorage.setItem('checkout', JSON.stringify(checkoutItems));
-            updateCounter();
-        } else {
-            throw new Error("Product not found");
-        }
-    } catch (e) {
-        console.error("Unable to add to cart:", e);
-    }
-}
-
-
-
-
-// cart counter
-function updateCounter() {
-    let totalItems = 0;
+window.onload = () => {
+    let totalQuantity = 0;
+    let checkoutItems = JSON.parse(localStorage.getItem("checkout")) || [];
     checkoutItems.forEach(item => {
-        totalItems += item.qty;
+        totalQuantity += item.qty || 0;
     });
-    counterElement.textContent = `${totalItems}`;
-}
+    document.querySelector("[counter]").textContent = totalQuantity;
+};
+
 
 
 
