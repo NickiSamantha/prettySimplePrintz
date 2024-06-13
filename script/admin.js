@@ -1,6 +1,8 @@
 // Select elements using querySelector
 let container = document.querySelector('[data-ourStore]');
 let searchProduct = document.querySelector('[data-searchProduct]');
+let errorContainer = document.getElementById('searchError'); // Define the error container
+
 let sortingByAmount = document.querySelector('[data-sorting]');
 let checkoutItems = JSON.parse(localStorage.getItem('checkout')) || [];
 
@@ -10,32 +12,44 @@ let products = JSON.parse(localStorage.getItem('products')) || [];
 // Current year
 document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear();
 
+// Product constructor function
+class Product {
+    constructor(id, productName, category, description, amount, img_url) {
+        this.id = id;
+        this.productName = productName;
+        this.category = category;
+        this.description = description;
+        this.amount = parseFloat(amount);
+        this.img_url = img_url;
+    }
+}
+
 // Function to display products in the admin table
 function displayProducts(productsArray) {
     let productTableBody = document.querySelector('#productTableBody');
     productTableBody.innerHTML = '';
     productsArray.forEach((product, index) => {
-        if (product.amount !== null){
+        if (product.amount !== null) {
             productTableBody.innerHTML += `
-            <tr>
-                <td>${product.productName}</td>
-                <td><img src="${product.img_url}" alt="${product.productName}" class="img-fluid" style="max-width: 100px;"></td>
-                <td>${product.category}</td>
-                <td>R${product.amount.toFixed(2)}</td>
-                <td>
-                    <button class="btn btn-warning btn-sm" onclick="editProduct(${index})">Edit</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteProduct(${index})">Delete</button>
-                </td>
-            </tr>
-        `;
+                <tr>
+                    <td>${product.id}</td>
+                    <td>${product.productName}</td>
+                    <td><img src="${product.img_url}" alt="${product.productName}" class="img-fluid" style="max-width: 100px;"></td>
+                    <td>${product.category}</td>
+                    <td>R${product.amount.toFixed(2)}</td>
+                    <td>
+                        <button class="btn btn-dark btn-sm mb-2 mt-2" onclick="editProduct(${index})">Edit</button>
+                        <button class="btn btn-danger btn-sm mb-2 mt-2" onclick="deleteProduct(${index})">Delete</button>
+                    </td>
+                </tr>
+            `;
         } else {
-            console.log(`Product ${product.productName} has no amount`)
+            console.log(`Product ${product.productName} has no amount`);
         }
-        
     });
 
     if (productsArray.length === 0) {
-        productTableBody.innerHTML = "<tr><td colspan='5'>No products found.</td></tr>";
+        productTableBody.innerHTML = "<tr><td colspan='6'>No products found.</td></tr>";
     }
 }
 
@@ -47,25 +61,25 @@ function addProduct() {
     let productAmount = document.querySelector('#productAmount').value;
     let productImage = document.querySelector('#productImage').value;
 
-    let newProduct = {
-        id: products.length + 1,
-        productName: productName,
-        category: productCategory,
-        description: productDescription,
-        amount: parseFloat(productAmount),
-        img_url: productImage
-    };
+    let newProduct = new Product(
+        products.length + 1,
+        productName,
+        productCategory,
+        productDescription,
+        productAmount,
+        productImage
+    );
 
     products.push(newProduct);
     localStorage.setItem('products', JSON.stringify(products));
     displayProducts(products);
     document.querySelector('#productForm').reset();
-    let successModal = new bootstrap.Modal(getElementById('successModal'));
+    let successModal = new bootstrap.Modal(document.getElementById('successModal'));
     let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
     productModal.hide();
     successModal.show();
-     // Redirect to admin page after 2 seconds
-     setTimeout(() => {
+    // Redirect to admin page after 2 seconds
+    setTimeout(() => {
         successModal.hide();
         window.location.href = 'admin.html';
     }, 2000);
@@ -82,19 +96,22 @@ function editProduct(index) {
 
     document.querySelector('#saveProductBtn').innerText = 'Update Product';
     document.querySelector('#saveProductBtn').onclick = function() {
-        updateProduct(index);
+        updateProduct(index, product.id);
     };
     let productModal = new bootstrap.Modal(document.getElementById('productModal'));
     productModal.show();
 }
 
 // Function to update a product
-function updateProduct(index) {
-    products[index].productName = document.querySelector('#productName').value;
-    products[index].category = document.querySelector('#productCategory').value;
-    products[index].description = document.querySelector('#productDescription').value;
-    products[index].amount = parseFloat(document.querySelector('#productAmount').value);
-    products[index].img_url = document.querySelector('#productImage').value;
+function updateProduct(index, productId) {
+    products[index] = new Product(
+        productId,
+        document.querySelector('#productName').value,
+        document.querySelector('#productCategory').value,
+        document.querySelector('#productDescription').value,
+        document.querySelector('#productAmount').value,
+        document.querySelector('#productImage').value
+    );
 
     localStorage.setItem('products', JSON.stringify(products));
     displayProducts(products);
@@ -104,7 +121,6 @@ function updateProduct(index) {
     let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
     productModal.hide();
 }
-
 
 // Function to delete a product
 function deleteProduct(index) {
@@ -130,7 +146,6 @@ function sortProducts() {
     isToggle = !isToggle;
     displayProducts(products);
 }
-
 // Function to handle product search
 searchProduct.addEventListener('keyup', () => {
     try {
@@ -139,13 +154,16 @@ searchProduct.addEventListener('keyup', () => {
             displayProducts(products);
             return;
         }
+
         let filteredProducts = products.filter(product => product.productName.toLowerCase().includes(searchValue));
         displayProducts(filteredProducts);
         if (filteredProducts.length === 0) {
+
             throw new Error(`${searchProduct.value} was not found.`);
         }
     } catch (e) {
-        container.textContent = e.message || 'Please try again later';
+        errorContainer.textContent = e.message || 'Please try again later';
+        errorContainer.computedStyleMap.display = 'block'
     }
 });
 
@@ -181,5 +199,4 @@ window.onload = () => {
     document.querySelector('[counter]').textContent = checkoutItems.length || 0;
     displayProducts(products);
 }
-
 
