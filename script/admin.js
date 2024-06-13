@@ -103,15 +103,12 @@ function editProduct(index) {
 }
 
 // Function to update a product
-function updateProduct(index, productId) {
-    products[index] = new Product(
-        productId,
-        document.querySelector('#productName').value,
-        document.querySelector('#productCategory').value,
-        document.querySelector('#productDescription').value,
-        document.querySelector('#productAmount').value,
-        document.querySelector('#productImage').value
-    );
+function updateProduct(index) {
+    products[index].productName = document.querySelector('#productName').value;
+    products[index].category = document.querySelector('#productCategory').value;
+    products[index].description = document.querySelector('#productDescription').value;
+    products[index].amount = parseFloat(document.querySelector('#productAmount').value);
+    products[index].img_url = document.querySelector('#productImage').value;
 
     localStorage.setItem('products', JSON.stringify(products));
     displayProducts(products);
@@ -121,6 +118,7 @@ function updateProduct(index, productId) {
     let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
     productModal.hide();
 }
+
 
 // Function to delete a product
 function deleteProduct(index) {
