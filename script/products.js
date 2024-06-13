@@ -102,14 +102,14 @@ if (!localStorage.getItem('products')) {
 // Current year
 document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear();
 //spinner
-let spinner = document.createElement('div');
-spinner.className = 'pinner-border text-primary';
-spinner.role = 'status';
-spinner.innerHTML = '<span class="sr-only"></span>';
-container.appendChild(spinner);
+// let spinner = document.createElement('div');
+// spinner.className = 'pinner-border text-primary';
+// spinner.role = 'status';
+// spinner.innerHTML = '<span class="sr-only"></span>';
+// container.appendChild(spinner);
 function displayProducts(productsArray) {
     container.innerHTML = "";
-       spinner.style.display = "block" ; 
+       // spinner.style.display = "block" ; 
     try {
         productsArray.forEach(product => {
             container.innerHTML += `
@@ -132,13 +132,13 @@ function displayProducts(productsArray) {
             container.textContent = "No products found.";
         }
     } catch (e) {
-        container.textContent = "Please try again later.";
+        container.textContent = "Please contact the administrator.";
     }
-    finally {
-        setTimeout( () => {
-        spinner.style.display = "none" ; 
-        }, 100 );
-    }
+    // finally {
+    //     setTimeout( () => {
+    //     spinner.style.display = "none" ; 
+    //     }, 100 );
+    // }
 }
 
 displayProducts(products);
