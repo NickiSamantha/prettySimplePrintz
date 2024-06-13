@@ -99,12 +99,10 @@ function recentProducts() {
         latestProducts.forEach(product => {
             wrapper.innerHTML += `
             
-            <div class="col-md-4 pt-4 pb-4">
-            
+            <div class="products col-md-4 pt-4 pb-4 mb-3">
             <img src="${product.img_url}" class="card-img-top" alt="${product.productName}" loading='lazy'>
             <div class="card-body text-center">
-                <h4 class="card-title">${product.productName}</h4>
-                 
+                <h4 class="card-title pt-4">${product.productName}</h4>
             </div>
             </div>
     `

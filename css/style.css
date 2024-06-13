@@ -345,3 +345,14 @@ footer {
 .search .btn:hover {
   background-color: #966b50;
 }
+
+.products {
+  border: 1px solid #b1825e;
+  border-radius: 5px;
+  padding: 1rem ;
+  
+}
+.card.img-top {
+  height: ;
+  width: ;
+}

@@ -107,10 +107,10 @@ function displayProducts(productsArray) {
     try {
         productsArray.forEach(product => {
             container.innerHTML += `
-                <div class="col-sm-2">
+                <div class="products col-sm-4">
                     <img src="${product.img_url}" class="card-img-top pt-4" alt="${product.productName}" loading='lazy'>
                     <div class="card-body">
-                        <h5 class="card-title">${product.productName}</h5>
+                        <h5 class="card-title pt-4">${product.productName}</h5>
                         <p class="description card-text">${product.description}</p>
                         <p class="card-text">
                             <span class=" fw-bold">Amount</span>
