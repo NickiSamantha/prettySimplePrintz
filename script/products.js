@@ -192,7 +192,9 @@ function addToCart(productId) {
         if (product) {
              let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
             if (existingItemIndex !== -1) {
-                checkoutItems[existingItemIndex].qty += 1;
+               let existingItem = checkoutItems[existingItemIndex];
+                let newItem = { ...product, qty:1};
+                checkoutItems.push(newItem);
             } else {
            let newItem = { ...product, qty: 1};
             checkoutItems.push(newItem);
