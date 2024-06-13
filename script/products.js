@@ -190,17 +190,11 @@ function addToCart(productId) {
     try {
         let product = products.find(p => p.id === productId);
         if (product) {
-             let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
-            if (existingItemIndex !== -1) {
-               let existingItem = checkoutItems[existingItemIndex];
-                 existingItem.qty += 1;
-            } else {
-           let newItem = { ...product, qty: 1};
+                 let newItem = {...product, qty: 1};
             checkoutItems.push(newItem);
-            }
-            localStorage.setItem('checkout',JSON.stringify(checkoutItems));
+            localStorage.setItem('checkout', JSON.stringify(checkoutItems));
             updateCounter();
-} else {
+        } else {
             throw new Error("Product not found");
         }
     } catch (e) {
@@ -211,9 +205,15 @@ function addToCart(productId) {
 // cart counter
 function updateCounter() {
     let totalItems = 0;
-    checkoutItems.forEach(item => { totalItems += item.qty;
-                                  });
+  let itemCounts = {};
+    checkoutItems.forEach(item => {
+        totalItems += item.qty;
+        itemCounts[item.id] = (itemCounts[item.id] || 0) + item.qty;
+    });
     counterElement.textContent = totalItems;
+    checkoutItems.forEach(item => {
+        item.qty = itemCounts[item.id];
+    });
 }
 
 window.onload = () => {
