@@ -104,12 +104,12 @@ document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear(
 //spinner
 let spinner = document.createElement('div');
 spinner.className = 'pinner-border text-primary';
-spinner.role = 'tatus';
-spinner.innerHTML = '<span class="sr-only">Loading...</span>';
+spinner.role = 'status';
+spinner.innerHTML = '<span class="sr-only"></span>';
 container.appendChild(spinner);
 function displayProducts(productsArray) {
     container.innerHTML = "";
-    spinner.style.display = "block" ; 
+      spinner.style.display = "block" ; 
     try {
         productsArray.forEach(product => {
             container.innerHTML += `
