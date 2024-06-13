@@ -211,4 +211,5 @@ function updateCounter() {
 
 window.onload = () => {
     document.querySelector('[counter]').textContent = checkoutItems.length || 0;
+    
 }

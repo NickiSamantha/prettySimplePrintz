@@ -40,20 +40,36 @@ function updateCounter() {
 
 // Function to handle payment
 function payNow() {
-    let paymentSuccessModal = new bootstrap.Modal(document.getElementById('paymentSuccessModal'));
-    paymentSuccessModal.show();
-    checkoutItems = [];
-    localStorage.setItem('checkout', JSON.stringify(checkoutItems));
-    updateCheckoutTable();
-}
-function clearCart() {
-    let confirmation = confirm("Are you sure you want to clear all items?");
-    if (confirmation) {
+    if (checkoutItems.length === 0) {
+        let emptyCartModal = new bootstrap.Modal(document.getElementById('emptyCartModal'));
+        emptyCartModal.show();
+    } else {
+        let paymentSuccessModal = new bootstrap.Modal(document.getElementById('paymentSuccessModal'));
+        paymentSuccessModal.show();
         checkoutItems = [];
         localStorage.setItem('checkout', JSON.stringify(checkoutItems));
         updateCheckoutTable();
     }
 }
+
+// Function to clear cart
+function clearCart() {
+    let clearCartModal = new bootstrap.Modal(document.getElementById('clearCartModal'));
+    clearCartModal.show();
+}
+
+// Add event listeners
+payNowBtn.addEventListener('click', payNow);
+clearBtn.addEventListener('click', clearCart);
+
+// Add modal event listeners
+document.getElementById('clearCartConfirmBtn').addEventListener('click', () => {
+    checkoutItems = [];
+    localStorage.setItem('checkout', JSON.stringify(checkoutItems));
+    updateCheckoutTable();
+    let clearCartModal = bootstrap.Modal.getInstance(document.getElementById('clearCartModal'));
+    clearCartModal.hide();
+});
 // Display initial table and total amount
 updateCheckoutTable();
 payNowBtn.addEventListener('click', payNow);
