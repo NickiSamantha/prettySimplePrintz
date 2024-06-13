@@ -190,8 +190,13 @@ function addToCart(productId) {
     try {
         let product = products.find(p => p.id === productId);
         if (product) {
-                 let newItem = {...product, qty: 1};
-            checkoutItems.push(newItem);
+            let existingItem = checkoutItems.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.qty++;
+            } else {
+                let newItem = {...product, qty: 1};
+                checkoutItems.push(newItem);
+            }
             localStorage.setItem('checkout', JSON.stringify(checkoutItems));
             updateCounter();
         } else {
@@ -205,24 +210,19 @@ function addToCart(productId) {
 // cart counter
 function updateCounter() {
     let totalItems = 0;
-  let itemCounts = {};
     checkoutItems.forEach(item => {
         totalItems += item.qty;
-        itemCounts[item.id] = (itemCounts[item.id] || 0) + item.qty;
     });
-    counterElement.textContent = totalItems;
+    counterElement.textContent = `Cart (${totalItems})`;
+    // Display the quantity of each item in the cart
+    let cartHTML = "";
     checkoutItems.forEach(item => {
-        item.qty = itemCounts[item.id];
+        cartHTML += `${item.productName} x ${item.qty}<br>`;
     });
+    document.querySelector('[cart-items]').innerHTML = cartHTML;
 }
 
-window.onload = () => {
-    let totalItems = 0;
-    checkoutItems.forEach(item => {
-        totalItems += item.qty;
-    });
-    document.querySelector('[counter]').textContent = totalItems;
-}
+
 
 
     
