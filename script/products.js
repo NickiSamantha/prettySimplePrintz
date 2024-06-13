@@ -1,5 +1,5 @@
 let container = document.querySelector('[ourStore]');
-// let spinner = document.querySelector('#spinner');
+
 let searchProduct = document.querySelector('[searchProduct]');
 let sortingByAmount = document.querySelector('[sorting]');
 let filterCategory = document.querySelector('[filterCategory]');
@@ -102,15 +102,10 @@ if (!localStorage.getItem('products')) {
 }
 // Current year
 document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear();
-//spinner
-// let spinner = document.createElement('div');
-// spinner.className = 'pinner-border text-primary';
-// spinner.role = 'status';
-// spinner.innerHTML = '<span class="sr-only"></span>';
-// container.appendChild(spinner);
+
 function displayProducts(productsArray) {
     container.innerHTML = "";
-        // spinner.style.display = "block" ; 
+       
     try {
         productsArray.forEach(product => {
             container.innerHTML += `
@@ -135,11 +130,7 @@ function displayProducts(productsArray) {
     } catch (e) {
         container.textContent = "Please contact the administrator.";
     }
-       // finally {
-       //  setTimeout( () => {
-       //  spinner.style.display = "none" ; 
-       //  }, 100 );
-       //  }
+       
 }
 
 displayProducts(products);
@@ -199,7 +190,17 @@ function addToCart(productId) {
     try {
         let product = products.find(p => p.id === productId);
         if (product) {
-           
+           let newItem = { ...product, qty: 1};
+            checkoutItems.push(newItem);
+            localStorage.setItem('checkout',JSON.stringify(checkoutItems));
+            updateCounter();
+        } else {
+            throw new Error("Product not found");
+        }
+    } catch (e) {
+        console.error("Unable to add to cart:", e);
+    }
+}
             let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
             if (existingItemIndex !== -1) {
                 checkoutItems[existingItemIndex].qty += 1;
@@ -228,13 +229,8 @@ window.onload = () => {
     document.querySelector('[counter]').textContent = checkoutItems.length || 0;
 
 }
-// document.addEventListener('DOMContentLoaded', () => {
-//     if (!localStorage.getItem('products')) {
-//         localStorage.clear();
-//         location.reload();
-//     }
-// });
+
 
     
-// }
+
 
