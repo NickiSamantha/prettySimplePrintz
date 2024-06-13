@@ -223,6 +223,7 @@ function updateCounter() {
 
 window.onload = () => {
     document.querySelector('[counter]').textContent = checkoutItems.length || 0;
+
 }
 document.addEventListener('DOMContentLoaded', () => {
     if (!localStorage.getItem('products')) {
@@ -230,3 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         location.reload();
     }
 });
+
+    
+}
+
