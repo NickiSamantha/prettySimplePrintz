@@ -103,7 +103,9 @@ function editProduct(index) {
 }
 
 // Function to update a product
-function updateProduct(index) {
+
+function updateProduct(index, productId) {
+    products[index].id = productId;
     products[index].productName = document.querySelector('#productName').value;
     products[index].category = document.querySelector('#productCategory').value;
     products[index].description = document.querySelector('#productDescription').value;
@@ -116,7 +118,6 @@ function updateProduct(index) {
     let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
     productModal.hide();
 }
-
 
 // Function to delete a product
 function deleteProduct(index) {
