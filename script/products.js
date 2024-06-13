@@ -190,21 +190,14 @@ function addToCart(productId) {
     try {
         let product = products.find(p => p.id === productId);
         if (product) {
-           let newItem = { ...product, qty: 1};
-            checkoutItems.push(newItem);
-            localStorage.setItem('checkout',JSON.stringify(checkoutItems));
-            updateCounter();
-       
-
-            let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
+             let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
             if (existingItemIndex !== -1) {
                 checkoutItems[existingItemIndex].qty += 1;
             } else {
-                product.qty = 1;
-                checkoutItems.push(product);
+           let newItem = { ...product, qty: 1};
+            checkoutItems.push(newItem);
             }
-            localStorage.setItem('checkout', JSON.stringify(checkoutItems));
-        
+            localStorage.setItem('checkout',JSON.stringify(checkoutItems));
             updateCounter();
 } else {
             throw new Error("Product not found");
