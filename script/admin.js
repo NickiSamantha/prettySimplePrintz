@@ -1,3 +1,19 @@
+// Select the spinner element
+const spinner = document.querySelector('.spinner');
+
+// Function to display the spinner
+function showSpinner() {
+    spinner.style.display = 'block';
+}
+
+// Function to hide the spinner
+function hideSpinner() {
+    spinner.style.display = 'none';
+}
+
+// Display the spinner when accessing local storage
+showSpinner();
+
 // Select elements using querySelector
 let container = document.querySelector('[data-ourStore]');
 let searchProduct = document.querySelector('[data-searchProduct]');
@@ -51,6 +67,9 @@ function displayProducts(productsArray) {
     if (productsArray.length === 0) {
         productTableBody.innerHTML = "<tr><td colspan='6'>No products found.</td></tr>";
     }
+
+    // Hide the spinner after products are displayed
+    hideSpinner();
 }
 
 // Function to add a new product
@@ -104,7 +123,6 @@ function editProduct(index) {
 }
 
 // Function to update a product
-
 function updateProduct(index) {
    
     products[index].productName = document.querySelector('#productName').value;
@@ -202,4 +220,3 @@ window.onload = () => {
     document.querySelector("[counter]").textContent = totalQuantity;
     displayProducts(products); 
 };
-
