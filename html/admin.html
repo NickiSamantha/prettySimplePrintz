@@ -69,101 +69,139 @@
       </div>
     </nav>
 
-      <main class="container-fluid">
+       <main class="container-fluid">
         <div class="row">
             <h2 class="display-2 mt-3">ADMIN DASHBOARD</h2>
         </div>
-       <div class="container mt-3">
-          <h1>Manage Products</h1>
-          <div class="row mb-3">
-              <div class="col-sm-4" data-ourStore>
-                 <input type="text" class="form-control mt-3 mb-3" placeholder="Search Products" data-searchProduct/>
-                 <div class="invalid-feedback">Please enter a valid search term</div> 
+        <div class="container mt-3">
+            <h1>Manage Products</h1>
+            <div class="row mb-3">
+                <div class="col-sm-4" data-ourStore>
+                    <input
+                        type="text"
+                        class="form-control mt-3 mb-3"
+                        placeholder="Search Products"
+                        data-searchProduct
+                    />
+                    <div class="invalid-feedback">Please enter a valid search term</div>
                 </div>
-              <div class="col-sm-4">
-                  <button class="btn btn-light mt-3 mb-3" id="sortButton" data-sorting>Sort by Amount</button>
-              </div>
-              <div class="col-sm-4 text-right">
-                  <button type="button" class="btn btn-light mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#productModal">Add New Product</button>
-              </div>
-          </div>
-          <div class="table-responsive">
-             <table class="table table-bordered">
-              <thead>
-                  <tr>
-                      <th data-label> ID</th>
-                      <th data-label>Product Name</th>
-                      <th data-label>Image</th>
-                      <th data-label>Category</th>
-                      <th data-label>Price</th>
-                      <th data-label>Actions</th>
-                  </tr>
-              </thead>
-              <tbody id="productTableBody">
-                  <!-- Product rows will be added here by JavaScript -->
-              </tbody>
-          </table>
-          </div> 
-          
-      </div>
-  
-      <!-- Modal for Adding/Editing Products -->
-    
-       <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header ">
-                      <h5 class="modal-title" id="productModalLabel">Add New Product</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                      
-                      </button>
-                  </div>
-                  <div class="modal-body">
-                      <form id="productForm">
-                          <div class="mb-3">
-                              <label for="productName" class="form-label">Product Name</label>
-                              <input type="text" class="form-control" id="productName" required>
-                          </div>
-                          <div class="mb-3">
-                              <label for="productCategory" class="form-label">Category</label>
-                              <input type="text" class="form-control" id="productCategory" required>
-                          </div>
-                          <div class="mb-3">
-                              <label for="productDescription" class="form-label">Description</label>
-                              <textarea class="form-control" id="productDescription" required></textarea>
-                          </div>
-                          <div class="mb-3">
-                              <label for="productAmount" class="form-label">Price</label>
-                              <input type="number" class="form-control" id="productAmount" step="0.01" required>
-                          </div>
-                          <div class="mb-3">
-                              <label for="productImage" class="form-label">Image URL</label>
-                              <input type="text" class="form-control" id="productImage" required>
-                          </div>
-                      </form>
-                  </div>
-                  <div class="modal-footer">
-                     <button type="button" class="btn btn-dark" id="saveProductBtn" data-bs-dismiss="modal">Save Product</button>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">Product Added</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                      
+                <div class="col-sm-4">
+                    <button class="btn btn-light mt-3 mb-3" id="sortButton" data-sorting>
+                        Sort by Amount
                     </button>
                 </div>
-                <div class="modal-body">
-                    Product added successfully!
+                <div class="col-sm-4 text-right">
+                    <button
+                        type="button"
+                        class="btn btn-light mt-3 mb-3"
+                        data-bs-toggle="modal"
+                        data-bs-target="#productModalAdd"
+                    >
+                        Add New Product
+                    </button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th data-label>ID</th>
+                            <th data-label>Product Name</th>
+                            <th data-label>Image</th>
+                            <th data-label>Category</th>
+                            <th data-label>Price</th>
+                            <th data-label>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productTableBody">
+                        <!-- Product rows will be added here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Modal for Adding Products -->
+        <div class="modal fade" id="productModalAdd" tabindex="-1" aria-labelledby="productModalLabelAdd" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productModalLabelAdd">Add New Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="productForm">
+                            <div class="mb-3">
+                                <label for="productName" class="form-label">Product Name</label>
+                                <input type="text" class="form-control" id="productName" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="productCategory" class="form-label">Category</label>
+                                <input type="text" class="form-control" id="productCategory" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="productDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="productDescription" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="productAmount" class="form-label">Price</label>
+                                <input type="number" class="form-control" id="productAmount" step="0.01" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="productImage" class="form-label">Image URL</label>
+                                <input type="text" class="form-control" id="productImage" required />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" id="saveProductBtnAdd" data-bs-dismiss="modal">
+                            Add Product
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div> 
-</main>
+
+        <!-- Modal for Editing Products -->
+        <div class="modal fade" id="productModalEdit" tabindex="-1" aria-labelledby="productModalLabelEdit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productModalLabelEdit">Edit Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="productFormEdit">
+                            <div class="mb-3">
+                                <label for="productNameEdit" class="form-label">Product Name</label>
+                                <input type="text" class="form-control" id="productNameEdit" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="productCategoryEdit" class="form-label">Category</label>
+                                <input type="text" class="form-control" id="productCategoryEdit" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="productDescriptionEdit" class="form-label">Description</label>
+                                <textarea class="form-control" id="productDescriptionEdit" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="productAmountEdit" class="form-label">Price</label>
+                                <input type="number" class="form-control" id="productAmountEdit" step="0.01" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="productImageEdit" class="form-label">Image URL</label>
+                                <input type="text" class="form-control" id="productImageEdit" required />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" id="saveProductBtnEdit" data-bs-dismiss="modal">
+                            Update Product
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
     <footer class="bottom container-fluid">
       <div class="row">
           <p class="lead">Copyright &copy;
