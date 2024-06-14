@@ -13,6 +13,14 @@ function hideSpinner() {
 
 // Display the spinner when accessing local storage
 showSpinner();
+// Event listener to hide the spinner when the page and all resources have finished loading
+window.addEventListener('load', () => {
+    // Get a reference to the spinner element
+    const spinner = document.querySelector('.spinner-border');
+
+    // Hide the spinner
+    spinner.style.display = 'none';
+});
 
 // Select elements using querySelector
 let container = document.querySelector('[data-ourStore]');
