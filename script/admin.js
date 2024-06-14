@@ -74,7 +74,7 @@ function openEditModal(index) {
     productModalEdit.show();
 }
 // Event listeners
-document.getElementById('addProductBtn').addEventListener('click', openAddModal);
+// document.getElementById('addProductBtn').addEventListener('click', openAddModal);
 
 // Function to add a new product
 function addProduct() {
