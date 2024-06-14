@@ -11,6 +11,9 @@ function hideSpinner() {
     spinner.style.display = 'none';
 }
 
+// Set a timer to hide the spinner after 2 seconds (2000 milliseconds)
+setTimeout(hideSpinner, 2000);
+
 // Display the spinner when accessing local storage
 showSpinner();
 // Event listener to hide the spinner when the page and all resources have finished loading
