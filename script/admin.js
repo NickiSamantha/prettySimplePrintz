@@ -96,7 +96,7 @@ function editProduct(index) {
 
     document.querySelector('#saveProductBtn').innerText = 'Update Product';
     document.querySelector('#saveProductBtn').onclick = function() {
-        updateProduct(index, product.id);
+        updateProduct(index, product.id); // Pass the product.id as the productId parameter
     };
     let productModal = new bootstrap.Modal(document.getElementById('productModal'));
     productModal.show();
@@ -105,7 +105,7 @@ function editProduct(index) {
 // Function to update a product
 
 function updateProduct(index, productId) {
-    products[index].id = productId;
+   
     products[index].productName = document.querySelector('#productName').value;
     products[index].category = document.querySelector('#productCategory').value;
     products[index].description = document.querySelector('#productDescription').value;
