@@ -220,6 +220,14 @@ window.onload = () => {
         totalQuantity += item.qty || 0;
     });
     document.querySelector("[counter]").textContent = totalQuantity;
-    displayProducts(products); 
+    displayProducts(products);
+    // Load products from local storage and display them
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    displayProducts(products);
+
+   // Hide the spinner after 2 seconds, or when products are loaded
+    setTimeout(() => {
+        hideSpinner();
+    }, 2000);
 };
 
