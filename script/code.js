@@ -103,7 +103,7 @@ function recentProducts() {
             <img src="${product.img_url}" class="card-img-top" alt="${product.productName}" loading='lazy'>
             <div class="card-body text-center">
                 <h4 class="card-title pt-4">${product.productName}</h4>
-                <button class="btn btn-light view-product-btn mt-3" data-id="${product.id}">View Product</button>
+               <a href="./html/products.html"> <button class="btn btn-light view-product-btn mt-3" data-id="${product.id}">View Product</button> </a> 
 
             </div>
             </div>
@@ -128,7 +128,10 @@ window.onload = () => {
     });
     document.querySelector("[counter]").textContent = totalQuantity;
 };
-
+let spinnerWrapper = document.querySelector(".spinner-wrapper");
+setTimeout(() => {
+  spinnerWrapper.style.opacity = 0;
+}, 400);
 
 
 

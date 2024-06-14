@@ -75,7 +75,7 @@
 
       <main class="container-fluid">
         <div class="row">
-            <h2 class="display-2">
+            <h2 class="display-2 mt-3">
                 CHECKOUT
             </h2>
         </div>
@@ -110,32 +110,51 @@
         <button id="payNowBtn" class="paynow btn btn-light"data-toggle="modal" data-target="#thankYouModal">Pay Now</button>
         
     </div>
+
+    <div class="modal fade" id="clearCartModal" tabindex="-1" aria-labelledby="clearCartModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="clearCartModalLabel">Clear Cart 🗑️</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to clear all items from the cart?🥺
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">👎</button>
+            <button type="button" class="btn btn-primary" id="confirmClearBtn">👍</button>
+          </div>
+        </div>
+      </div>
+    </div>
   
 <div class="modal fade" id="paymentSuccessModal" tabindex="-1" aria-labelledby="paymentSuccessModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="paymentSuccessModalLabel">Payment Successful👌</h5>
+                <h5 class="modal-title" id="paymentSuccessModalLabel">Payment Successful✔️</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Thank you for your payment!👍
+                Thank you for your payment!💕
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">See you!</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">See you again soon ! 😁</button>
             </div>
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="emptyCartModal" tabindex="-1" aria-labelledby="emptyCartModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="emptyCartModalLabel">Empty Cart💔</h5>
+        <h5 class="modal-title" id="emptyCartModalLabel">Empty Cart😭</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Your cart is empty😒. Please add some items😁.
+        Your cart is empty🥺. Please add some items. 🙏
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Okay!</button>
@@ -143,24 +162,10 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="clearCartModal" tabindex="-1" aria-labelledby="clearCartModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="clearCartModalLabel">Clear Cart</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to clear your cart?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-dark" id="clearCartConfirmBtn">Yes</button>
-      </div>
-    </div>
-  </div>
-</div>
+
     </main>
+
+    
     <footer class="bottom container-fluid">
         <div class="row">
           <p class="lead">

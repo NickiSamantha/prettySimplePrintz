@@ -1,17 +1,3 @@
-// Select the spinner element
-const spinner = document.querySelector('.spinner');
-
-// Function to display the spinner
-function showSpinner() {
-    spinner.style.display = 'block';
-}
-
-// Function to hide the spinner
-function hideSpinner() {
-    spinner.style.display = 'none';
-}
-
-// Select elements using querySelector
 let container = document.querySelector('[data-ourStore]');
 let searchProduct = document.querySelector('[data-searchProduct]');
 let errorContainer = document.getElementById('searchError'); // Define the error container
@@ -36,7 +22,6 @@ class Product {
         this.img_url = img_url;
     }
 }
-
 // Function to display products in the admin table
 function displayProducts(productsArray) {
     let productTableBody = document.querySelector('#productTableBody');
@@ -60,7 +45,6 @@ function displayProducts(productsArray) {
             console.log(`Product ${product.productName} has no amount`);
         }
     });
-
     if (productsArray.length === 0) {
         productTableBody.innerHTML = "<tr><td colspan='6'>No products found.</td></tr>";
     }
@@ -69,16 +53,17 @@ function displayProducts(productsArray) {
     hideSpinner();
 }
 
+
+
 // Function to add a new product
 function addProduct() {
-    // Show the spinner before adding a product
-    showSpinner();
+    
 
     let productName = document.querySelector('#productName').value;
-    let productCategory = document.querySelector('#productCategory').value;
-    let productDescription = document.querySelector('#productDescription').value;
-    let productAmount = document.querySelector('#productAmount').value;
-    let productImage = document.querySelector('#productImage').value;
+    let productCategory = document.querySelector('#addproductCategory').value;
+    let productDescription = document.querySelector('#addproductDescription').value;
+    let productAmount = document.querySelector('#addproductAmount').value;
+    let productImage = document.querySelector('#addproductImage').value;
 
     let newProduct = new Product(
         products.length + 1,
@@ -92,50 +77,107 @@ function addProduct() {
     products.push(newProduct);
     localStorage.setItem('products', JSON.stringify(products));
     displayProducts(products);
-    document.querySelector('#productForm').reset();
+    
+     // Close the modal after adding the product
+     let addProductModal = new bootstrap.Modal(document.getElementById('addProductModal'));
+     addProductModal.hide();
+         // Show success modal
+    showSuccessModal('Product added successfully!');
+}
+ 
+// Event listener for saving new product
+document.getElementById('saveAddProductBtn').addEventListener('click', function() {
+    addProduct();
+});
+
+// Function to show success modal
+function showSuccessModal(message) {
     let successModal = new bootstrap.Modal(document.getElementById('successModal'));
-    let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
-    productModal.hide();
+    let successModalMessage = document.getElementById('successModalMessage');
+    successModalMessage.textContent = message;
     successModal.show();
-    // Redirect to admin page after 2 seconds
-    setTimeout(() => {
-        successModal.hide();
-        window.location.href = 'admin.html';
-    }, 2000);
 }
 
-// Function to edit a product
-function editProduct(index) {
-    let product = products[index];
-     
-    document.querySelector('#productName').value = product.productName;
-    document.querySelector('#productCategory').value = product.category;
-    document.querySelector('#productDescription').value = product.description;
-    document.querySelector('#productAmount').value = product.amount;
-    document.querySelector('#productImage').value = product.img_url;
+// Function to display products in the admin table
+function displayProducts(productsArray) {
+    let productTableBody = document.querySelector('#productTableBody');
+    productTableBody.innerHTML = '';
+    productsArray.forEach((product, index) => {
+        if (product.amount !== null) {
+            productTableBody.innerHTML += `
+                <tr>
+                    <td>${product.id}</td>
+                    <td>${product.productName}</td>
+                    <td><img src="${product.img_url}" alt="${product.productName}" class="img-fluid" style="max-width: 100px;"></td>
+                    <td>${product.category}</td>
+                    <td>R${product.amount.toFixed(2)}</td>
+                    <td>
+                        <button class="btn btn-dark btn-sm mb-2 mt-2" onclick="editProductModal(${index})">Edit</button>
+                        <button class="btn btn-danger btn-sm mb-2 mt-2" onclick="deleteProduct(${index})">Delete</button>
+                    </td>
+                </tr>
+            `;
+        } else {
+            console.log(`Product ${product.productName} has no amount`);
+        }
+    });
 
-    document.querySelector('#saveProductBtn').innerText = 'Update Product';
-    document.querySelector('#saveProductBtn').onclick = function() {
-        updateProduct(index); 
-    };
-    let productModal = new bootstrap.Modal(document.getElementById('productModal'));
-    productModal.show();
+    if (productsArray.length === 0) {
+        productTableBody.innerHTML = "<tr><td colspan='6'>Product not found</td></tr>";
+    }
+}
+    // document.querySelector('#productForm').reset();
+
+    // let successModal = new bootstrap.Modal(document.getElementById('successModal'));
+    // let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+    // productModal.hide();
+    // successModal.show();  
+
+
+// Reset form fields when Add Product modal is shown
+document.getElementById('addProductModal').addEventListener('show.bs.modal', function() {
+    document.getElementById('addProductForm').reset();
+});
+
+
+// Function to edit a product
+function editProductModal(index) {
+    let product = products[index];
+
+    document.getElementById('editProductId').value = index;
+    document.getElementById('editProductName').value = product.productName;
+    document.getElementById('editProductCategory').value = product.category;
+    document.getElementById('editProductDescription').value = product.description;
+    document.getElementById('editProductAmount').value = product.amount.toFixed(2);
+    document.getElementById('editProductImage').value = product.img_url;
+   
+    let editProductModal = new bootstrap.Modal(document.getElementById('editProductModal'));
+    editProductModal.show();
 }
 
 // Function to update a product
-function updateProduct(index) {
-    products[index].productName = document.querySelector('#productName').value;
-    products[index].category = document.querySelector('#productCategory').value;
-    products[index].description = document.querySelector('#productDescription').value;
-    products[index].amount = parseFloat(document.querySelector('#productAmount').value);
-    products[index].img_url = document.querySelector('#productImage').value;
+function updateProduct() {
+    let index = document.getElementById('editProductId').value;
+    products[index].productName = document.getElementById('editProductName').value;
+    products[index].category = document.getElementById('editProductCategory').value;
+    products[index].description = document.getElementById('editProductDescription').value;
+    products[index].amount = parseFloat(document.getElementById('editProductAmount').value);
+    products[index].img_url = document.getElementById('editProductImage').value;
 
+    // Save updated products array to local storage
     localStorage.setItem('products', JSON.stringify(products));
+
+    // Display updated products in the table
     displayProducts(products);
-    document.querySelector('#productForm').reset();
-    let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
-    productModal.hide();
-}
+
+      // Reset form and close modal
+      document.getElementById('editProductForm').reset();
+      let editProductModal = new bootstrap.Modal(document.getElementById('editProductModal'));
+      editProductModal.hide();
+  
+      // Show success modal
+      showSuccessModal('Product updated successfully!');
+  }
 
 // Function to delete a product
 function deleteProduct(index) {
@@ -178,56 +220,33 @@ searchProduct.addEventListener('keyup', () => {
         }
     } catch (e) {
         errorContainer.textContent = e.message || 'Please try again later';
-        errorContainer.computedStyleMap.display = 'block'
+        errorContainer.style.display = 'block'
     }
 });
 
-// Function to add a product to the cart
-function addToCart(productId) {
-    try {
-        let product = products.find(p => p.id === productId);
-        if (product) {
-            let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
-            if (existingItemIndex !== -1) {
-                checkoutItems[existingItemIndex].qty += 1;
-            } else {
-                product.qty = 1;
-                checkoutItems.push(product);
-            }
-            localStorage.setItem('checkout', JSON.stringify(checkoutItems));
-            document.querySelector('[counter]').textContent = checkoutItems.length || 0;
-            updateCheckoutTable();
-        } else {
-            throw new Error("Product not found");
-        }
-    } catch (e) {
-        console.error("Unable to add to cart:", e);
-    }
-}
+// Event listener for adding new product
+document.getElementById('saveAddProductBtn').addEventListener('click', function() {
+    addProduct();
+    let addProductModal = new bootstrap.Modal(document.getElementById('addProductModal'));
+    addProductModal.show();
+});
 
-// Event listeners
-document.querySelector('#saveProductBtn').addEventListener('click', addProduct);
-document.querySelector('#sortButton').addEventListener('click', sortProducts);
+// Event listener for updating product
+document.getElementById('saveEditProductBtn').addEventListener('click', updateProduct);
 
 // Counter
 window.onload = () => {
-    // Show the spinner before loading products from local storage
-    showSpinner();
-
     let totalQuantity = 0;
     let checkoutItems = JSON.parse(localStorage.getItem("checkout")) || [];
     checkoutItems.forEach(item => {
         totalQuantity += item.qty || 0;
     });
+    
     document.querySelector("[counter]").textContent = totalQuantity;
-    displayProducts(products);
-    // Load products from local storage and display them
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-    displayProducts(products);
-
-   // Hide the spinner after 2 seconds, or when products are loaded
-    setTimeout(() => {
-        hideSpinner();
-    }, 2000);
+   
+   
+        displayProducts(products);
 };
+
+
 

@@ -51,25 +51,19 @@ function payNow() {
         updateCheckoutTable();
     }
 }
-
-// Function to clear cart
 function clearCart() {
     let clearCartModal = new bootstrap.Modal(document.getElementById('clearCartModal'));
     clearCartModal.show();
 }
 
-// Add event listeners
-payNowBtn.addEventListener('click', payNow);
-clearBtn.addEventListener('click', clearCart);
-
-// Add modal event listeners
-document.getElementById('clearCartConfirmBtn').addEventListener('click', () => {
+document.getElementById('confirmClearBtn').addEventListener('click', function() {
     checkoutItems = [];
     localStorage.setItem('checkout', JSON.stringify(checkoutItems));
     updateCheckoutTable();
     let clearCartModal = bootstrap.Modal.getInstance(document.getElementById('clearCartModal'));
     clearCartModal.hide();
 });
+
 // Display initial table and total amount
 updateCheckoutTable();
 payNowBtn.addEventListener('click', payNow);

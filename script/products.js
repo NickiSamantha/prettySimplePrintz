@@ -1,11 +1,12 @@
 let container = document.querySelector('[ourStore]');
-
 let searchProduct = document.querySelector('[searchProduct]');
 let sortingByAmount = document.querySelector('[sorting]');
 let filterCategory = document.querySelector('[filterCategory]');
 let checkoutItems = JSON.parse(localStorage.getItem('checkout')) || [];
-let wrapper = document.querySelector('[recentProducts]')
 let counterElement = document.querySelector('[counter]');
+
+let wrapper = document.querySelector('[recentProducts]')
+
 let products =
     JSON.parse(localStorage.getItem('products'))
         ? JSON.parse(localStorage.getItem('products'))
@@ -103,9 +104,11 @@ if (!localStorage.getItem('products')) {
 // Current year
 document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear();
 
+
 function displayProducts(productsArray) {
     container.innerHTML = "";
-       
+   
+
     try {
         productsArray.forEach(product => {
             container.innerHTML += `
@@ -127,10 +130,12 @@ function displayProducts(productsArray) {
         if (productsArray.length === 0) {
             container.textContent = "No products found.";
         }
+
+        
     } catch (e) {
-        container.textContent = "Please contact the administrator.";
-    }
+        container.textContent = "Loading...";
        
+    }
 }
 
 displayProducts(products);
@@ -151,8 +156,6 @@ searchProduct.addEventListener('keyup', () => {
         container.textContent = e.message || 'Please try again later';
     }
 });
-
-
 
 let isToggle = false;
 sortingByAmount.addEventListener('click', () => {
@@ -190,14 +193,12 @@ function addToCart(productId) {
     try {
         let product = products.find(p => p.id === productId);
         if (product) {
-            // Check if the product already exists in checkoutItems
+            
             let existingItemIndex = checkoutItems.findIndex(item => item.id === productId);
             if (existingItemIndex !== -1) {
-                // If the product already exists, increment its quantity
-                checkoutItems[existingItemIndex].qty++;
+               checkoutItems[existingItemIndex].qty++;
             } else {
-                // If the product doesn't exist, add it to checkoutItems
-                let newItem = { ...product, qty: 1 };
+              let newItem = { ...product, qty: 1 };
                 checkoutItems.push(newItem);
             }
             localStorage.setItem('checkout', JSON.stringify(checkoutItems));
@@ -209,10 +210,6 @@ function addToCart(productId) {
         console.error("Unable to add to cart:", e);
     }
 }
-
-
-
-
 // cart counter
 function updateCounter() {
     let totalItems = 0;
@@ -221,8 +218,12 @@ function updateCounter() {
     });
     counterElement.textContent = `${totalItems}`;
 }
+document.addEventListener("DOMContentLoaded", updateCounter);
 
-
+let spinnerWrapper = document.querySelector(".spinner-wrapper");
+setTimeout(() => {
+  spinnerWrapper.style.opacity = 0;
+}, 400);
 
 
     

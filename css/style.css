@@ -309,11 +309,7 @@ footer {
 }
 
 /*Product Page*/
-/* .search {
-  border: 1px solid #cca07d;
-  border-radius: 10px;
-  padding: 1rem;
-} */
+
 .search {
   border: 1px solid #cca07d;
   border-radius: 10px;
@@ -428,4 +424,5 @@ footer {
       width: 40%;
       font-weight: normal;
   }
+  
 }
