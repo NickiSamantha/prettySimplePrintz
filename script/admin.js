@@ -1,4 +1,3 @@
-// Select elements using querySelector
 let container = document.querySelector('[data-ourStore]');
 let searchProduct = document.querySelector('[data-searchProduct]');
 let errorContainer = document.getElementById('searchError'); // Define the error container
@@ -24,7 +23,7 @@ class Product {
     }
 }
 
-// Function to display products in the admin table
+// To display products in the admin table
 function displayProducts(productsArray) {
     let productTableBody = document.querySelector('#productTableBody');
     productTableBody.innerHTML = '';
@@ -52,13 +51,17 @@ function displayProducts(productsArray) {
         productTableBody.innerHTML = "<tr><td colspan='6'>No products found.</td></tr>";
     }
 }
-// Function to open the Add Product modal
+//To open the Add Product modal
 function openAddModal() {
+
+     let saveBtnAdd = document.getElementById('saveProductBtnAdd');
+    saveBtnAdd.dataset.productId = product.id; // Set productId in dataset for update
+
     let productModalAdd = new bootstrap.Modal(document.getElementById('productModalAdd'));
     productModalAdd.show();
 }
 
-// Function to open the Edit Product modal
+// To open the Edit Product modal
 function openEditModal(index) {
     let product = products[index];
     document.getElementById('productNameEdit').value = product.productName;
@@ -76,7 +79,7 @@ function openEditModal(index) {
 // Event listeners
 // document.getElementById('addProductBtn').addEventListener('click', openAddModal);
 
-// Function to add a new product
+// To add a new product
 function addProduct() {
     let productName = document.getElementById('productNameAdd').value;
     let productCategory = document.getElementById('productCategoryAdd').value;
@@ -119,19 +122,19 @@ document.getElementById('saveProductBtnEdit').addEventListener('click', function
 });
 
 // Function to update a product
-function updateProduct(index, productId) {
-    products[index].productName = document.getElementById('productNameEdit').value;
-    products[index].category = document.getElementById('productCategoryEdit').value;
-    products[index].description = document.getElementById('productDescriptionEdit').value;
-    products[index].amount = parseFloat(document.getElementById('productAmountEdit').value);
-    products[index].img_url = document.getElementById('productImageEdit').value;
+// function updateProduct(index, productId) {
+//     products[index].productName = document.getElementById('productNameEdit').value;
+//     products[index].category = document.getElementById('productCategoryEdit').value;
+//     products[index].description = document.getElementById('productDescriptionEdit').value;
+//     products[index].amount = parseFloat(document.getElementById('productAmountEdit').value);
+//     products[index].img_url = document.getElementById('productImageEdit').value;
 
-    localStorage.setItem('products', JSON.stringify(products));
-    displayProducts(products);
+//     localStorage.setItem('products', JSON.stringify(products));
+//     displayProducts(products);
 
-    let productModalEdit = new bootstrap.Modal(document.getElementById('productModalEdit'));
-    productModalEdit.hide();
-}
+//     let productModalEdit = new bootstrap.Modal(document.getElementById('productModalEdit'));
+//     productModalEdit.hide();
+// }
 // Initial display of products on page load
 window.addEventListener('DOMContentLoaded', () => {
     displayProducts(products);
@@ -161,6 +164,17 @@ function sortProducts() {
     isToggle = !isToggle;
     displayProducts(products);
 }
+// Function to reset sorting to original array order
+function resetSorting() {
+    // Restore original array order (unsorted)
+    products.sort((a, b) => a.id - b.id); 
+    sortingByAmount.textContent = 'Sorted by default'; 
+    isToggle = false;
+    displayProducts(products);
+}
+
+// Event listener for reset button or trigger
+ddocument.getElementById('resetSortingBtn').addEventListener('click', resetSorting);
 // Function to handle product search
 searchProduct.addEventListener('keyup', () => {
     try {
