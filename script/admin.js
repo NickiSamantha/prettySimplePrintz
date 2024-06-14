@@ -52,72 +52,90 @@ function displayProducts(productsArray) {
         productTableBody.innerHTML = "<tr><td colspan='6'>No products found.</td></tr>";
     }
 }
+// Function to open the Add Product modal
+function openAddModal() {
+    let productModalAdd = new bootstrap.Modal(document.getElementById('productModalAdd'));
+    productModalAdd.show();
+}
+
+// Function to open the Edit Product modal
+function openEditModal(index) {
+    let product = products[index];
+    document.getElementById('productNameEdit').value = product.productName;
+    document.getElementById('productCategoryEdit').value = product.category;
+    document.getElementById('productDescriptionEdit').value = product.description;
+    document.getElementById('productAmountEdit').value = product.amount;
+    document.getElementById('productImageEdit').value = product.img_url;
+
+    let saveBtnEdit = document.getElementById('saveProductBtnEdit');
+    saveBtnEdit.dataset.productId = product.id; // Set productId in dataset for update
+
+    let productModalEdit = new bootstrap.Modal(document.getElementById('productModalEdit'));
+    productModalEdit.show();
+}
+// Event listeners
+document.getElementById('addProductBtn').addEventListener('click', openAddModal);
 
 // Function to add a new product
 function addProduct() {
-    let productName = document.querySelector('#productName').value;
-    let productCategory = document.querySelector('#productCategory').value;
-    let productDescription = document.querySelector('#productDescription').value;
-    let productAmount = document.querySelector('#productAmount').value;
-    let productImage = document.querySelector('#productImage').value;
+    let productName = document.getElementById('productNameAdd').value;
+    let productCategory = document.getElementById('productCategoryAdd').value;
+    let productDescription = document.getElementById('productDescriptionAdd').value;
+    let productAmount = parseFloat(document.getElementById('productAmountAdd').value);
+    let productImage = document.getElementById('productImageAdd').value;
 
-    let newProduct = new Product(
-        products.length + 1,
-        productName,
-        productCategory,
-        productDescription,
-        productAmount,
-        productImage
-    );
+    let newProductId = products.length > 0 ? products[products.length - 1].id + 1 : 1;
+    let newProduct = new Product(newProductId, productName, productCategory, productDescription, productAmount, productImage);
 
     products.push(newProduct);
     localStorage.setItem('products', JSON.stringify(products));
     displayProducts(products);
-    document.querySelector('#productForm').reset();
+
     let successModal = new bootstrap.Modal(document.getElementById('successModal'));
-    let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
-    productModal.hide();
     successModal.show();
-    // Redirect to admin page after 2 seconds
+
+    // Close modal and redirect after 2 seconds
     setTimeout(() => {
         successModal.hide();
-        window.location.href = 'admin.html';
+        let productModalAdd = new bootstrap.Modal(document.getElementById('productModalAdd'));
+        productModalAdd.hide();
+        window.location.href = 'admin.html'; // Redirect to admin page
     }, 2000);
 }
 
-// Function to edit a product
+// Event listener for editing product button in the table
 function editProduct(index) {
-    let product = products[index];
-    document.querySelector('#productName').value = product.productName;
-    document.querySelector('#productCategory').value = product.category;
-    document.querySelector('#productDescription').value = product.description;
-    document.querySelector('#productAmount').value = product.amount;
-    document.querySelector('#productImage').value = product.img_url;
-
-    document.querySelector('#saveProductBtn').innerText = 'Update Product';
-    document.querySelector('#saveProductBtn').onclick = function() {
-        updateProduct(index, product.id); // Pass the product.id as the productId parameter
-    };
-    let productModal = new bootstrap.Modal(document.getElementById('productModal'));
-    productModal.show();
+    openEditModal(index);
 }
+// Event listener for updating a product
+document.getElementById('saveProductBtnEdit').addEventListener('click', function() {
+    let productId = this.dataset.productId;
+    let productIndex = products.findIndex(p => p.id === parseInt(productId));
+    if (productIndex !== -1) {
+        updateProduct(productIndex, productId);
+    } else {
+        console.error(`Product with ID ${productId} not found.`);
+    }
+});
 
 // Function to update a product
-
 function updateProduct(index, productId) {
-    products[index].id = productId;
-    products[index].productName = document.querySelector('#productName').value;
-    products[index].category = document.querySelector('#productCategory').value;
-    products[index].description = document.querySelector('#productDescription').value;
-    products[index].amount = parseFloat(document.querySelector('#productAmount').value);
-    products[index].img_url = document.querySelector('#productImage').value;
+    products[index].productName = document.getElementById('productNameEdit').value;
+    products[index].category = document.getElementById('productCategoryEdit').value;
+    products[index].description = document.getElementById('productDescriptionEdit').value;
+    products[index].amount = parseFloat(document.getElementById('productAmountEdit').value);
+    products[index].img_url = document.getElementById('productImageEdit').value;
 
     localStorage.setItem('products', JSON.stringify(products));
     displayProducts(products);
-    document.querySelector('#productForm').reset();
-    let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
-    productModal.hide();
+
+    let productModalEdit = new bootstrap.Modal(document.getElementById('productModalEdit'));
+    productModalEdit.hide();
 }
+// Initial display of products on page load
+window.addEventListener('DOMContentLoaded', () => {
+    displayProducts(products);
+});
 
 // Function to delete a product
 function deleteProduct(index) {
