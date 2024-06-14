@@ -88,6 +88,7 @@ function addProduct() {
 // Function to edit a product
 function editProduct(index) {
     let product = products[index];
+     console.log("Product ID:", product.id); // Log the product ID
     document.querySelector('#productName').value = product.productName;
     document.querySelector('#productCategory').value = product.category;
     document.querySelector('#productDescription').value = product.description;
