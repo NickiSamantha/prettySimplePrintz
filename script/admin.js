@@ -104,7 +104,7 @@ function editProduct(index) {
 
 // Function to update a product
 
-function updateProduct(index, productId) {
+function updateProduct(index) {
    
     products[index].productName = document.querySelector('#productName').value;
     products[index].category = document.querySelector('#productCategory').value;
