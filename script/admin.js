@@ -206,7 +206,7 @@ function addToCart(productId) {
 }
 
 // Event listeners
-document.querySelector('#saveProductBtn').addEventListener('click', addProduct);
+// document.querySelector('#saveProductBtn').addEventListener('click', addProduct);
 document.querySelector('#sortButton').addEventListener('click', sortProducts);
 
 //counter
