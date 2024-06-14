@@ -11,20 +11,6 @@ function hideSpinner() {
     spinner.style.display = 'none';
 }
 
-// Set a timer to hide the spinner after 2 seconds (2000 milliseconds)
-setTimeout(hideSpinner, 2000);
-
-// Display the spinner when accessing local storage
-showSpinner();
-// Event listener to hide the spinner when the page and all resources have finished loading
-window.addEventListener('load', () => {
-    // Get a reference to the spinner element
-    const spinner = document.querySelector('.spinner-border');
-
-    // Hide the spinner
-    spinner.style.display = 'none';
-});
-
 // Select elements using querySelector
 let container = document.querySelector('[data-ourStore]');
 let searchProduct = document.querySelector('[data-searchProduct]');
@@ -85,6 +71,9 @@ function displayProducts(productsArray) {
 
 // Function to add a new product
 function addProduct() {
+    // Show the spinner before adding a product
+    showSpinner();
+
     let productName = document.querySelector('#productName').value;
     let productCategory = document.querySelector('#productCategory').value;
     let productDescription = document.querySelector('#productDescription').value;
@@ -135,7 +124,6 @@ function editProduct(index) {
 
 // Function to update a product
 function updateProduct(index) {
-   
     products[index].productName = document.querySelector('#productName').value;
     products[index].category = document.querySelector('#productCategory').value;
     products[index].description = document.querySelector('#productDescription').value;
@@ -221,8 +209,11 @@ function addToCart(productId) {
 document.querySelector('#saveProductBtn').addEventListener('click', addProduct);
 document.querySelector('#sortButton').addEventListener('click', sortProducts);
 
-//counter
+// Counter
 window.onload = () => {
+    // Show the spinner before loading products from local storage
+    showSpinner();
+
     let totalQuantity = 0;
     let checkoutItems = JSON.parse(localStorage.getItem("checkout")) || [];
     checkoutItems.forEach(item => {
@@ -231,3 +222,4 @@ window.onload = () => {
     document.querySelector("[counter]").textContent = totalQuantity;
     displayProducts(products); 
 };
+
