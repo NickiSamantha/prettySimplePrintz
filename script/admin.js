@@ -88,7 +88,7 @@ function addProduct() {
 // Function to edit a product
 function editProduct(index) {
     let product = products[index];
-     console.log("Product ID:", product.id); // Log the product ID
+     
     document.querySelector('#productName').value = product.productName;
     document.querySelector('#productCategory').value = product.category;
     document.querySelector('#productDescription').value = product.description;
@@ -97,7 +97,7 @@ function editProduct(index) {
 
     document.querySelector('#saveProductBtn').innerText = 'Update Product';
     document.querySelector('#saveProductBtn').onclick = function() {
-        updateProduct(index, product.id); // Pass the product.id as the productId parameter
+        updateProduct(index); 
     };
     let productModal = new bootstrap.Modal(document.getElementById('productModal'));
     productModal.show();
