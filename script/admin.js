@@ -32,92 +32,138 @@ class Product {
 }
 
 // display products in the admin table
+
 function displayProducts(productsArray) {
-let productTableBody = document.querySelector('#productTableBody');
-productTableBody.innerHTML = '';
-productsArray.forEach((product, index) => {
-if (product.amount !== null) {
-productTableBody.innerHTML += <tr> <td>${product.id}</td> <td>${product.productName}</td> <td><img src="${product.img_url}" alt="${product.productName}" class="img-fluid" style="max-width: 100px;"></td> <td>${product.category}</td> <td>R${product.amount.toFixed(2)}</td> <td> <button class="btn btn-dark btn-sm mb-2 mt-2" onclick="editProduct(${index})">Edit</button> <button class="btn btn-danger btn-sm mb-2 mt-2" onclick="deleteProduct(${index})">Delete</button> </td> </tr> ;
-} else {
-console.log(Product ${product.productName} has no amount);
-}
-});
+
+    let productTableBody = document.querySelector('#productTableBody');
+
+    productTableBody.innerHTML = '';
+
+    productsArray.forEach((product, index) => {
+
+        if (product.amount !== null) {
+
+            productTableBody.innerHTML += 
+                <tr> <td>${product.id}</td> 
+                <td>${product.productName}</td> 
+                <td><img src="${product.img_url}" alt="${product.productName}" class="img-fluid" style="max-width: 100px;"></td> 
+                <td>${product.category}</td> 
+                <td>R${product.amount.toFixed(2)}</td> 
+                <td> <button class="btn btn-dark btn-sm mb-2 mt-2" onclick="editProduct(${index})">Edit</button> 
+                <button class="btn btn-danger btn-sm mb-2 mt-2" onclick="deleteProduct(${index})">Delete</button> 
+                </td> </tr> ;
+
+        } else {
+
+            console.log(Product ${product.productName} has no amount);
+
+        }
+
+    });
 
 
-if (productsArray.length === 0) {
-    productTableBody.innerHTML = "<tr><td colspan='6'>No products found.</td></tr>";
-}
+
+    if (productsArray.length === 0) {
+    
+        productTableBody.innerHTML = 
+            "<tr><td colspan='6'>No products found.</td></tr>";
+
+    }
+
 }
 
-// Function to add a new product
+//  add a new product
+
 function addProduct() {
-let productName = document.querySelector('#productName').value;
-let productCategory = document.querySelector('#productCategory').value;
-let productDescription = document.querySelector('#productDescription').value;
-let productAmount = document.querySelector('#productAmount').value;
-let productImage = document.querySelector('#productImage').value;
+
+    let productName = document.querySelector('#productName').value;
+
+    let productCategory = document.querySelector('#productCategory').value;
+
+    let productDescription = document.querySelector('#productDescription').value;
+
+    let productAmount = document.querySelector('#productAmount').value;
+
+    let productImage = document.querySelector('#productImage').value;
 
 
-let newProduct = new Product(
-    products.length + 1,
-    productName,
-    productCategory,
-    productDescription,
-    productAmount,
-    productImage
-);
 
-products.push(newProduct);
-localStorage.setItem('products', JSON.stringify(products));
-displayProducts(products);
-document.querySelector('#productForm').reset();
-let successModal = new bootstrap.Modal(document.getElementById('successModal'));
-let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
-productModal.hide();
-successModal.show();
-// Redirect to admin page after 2 seconds
-setTimeout(() => {
+    let newProduct = new Product(
+    
+        products.length + 1,
+    
+        productName,
+    
+        productCategory,
+    
+        productDescription,
+    
+        productAmount,
+    
+        productImage
+
+    );
+
+
+    products.push(newProduct);
+
+    localStorage.setItem('products', JSON.stringify(products));
+
+    displayProducts(products);
+    
+
+    document.querySelector('#productForm').reset();
+    
+
+    let successModal = new bootstrap.Modal(document.getElementById('successModal'));
+
+    let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+
+    productModal.hide();
+
+    successModal.show();
+
+ setTimeout(() => {
     successModal.hide();
     window.location.href = 'admin.html';
 }, 2000);
 }
 
 // Function to edit a product
-function editProduct(index) {
-let product = products[index];
-document.querySelector('#productName').value = product.productName;
-document.querySelector('#productCategory').value = product.category;
-document.querySelector('#productDescription').value = product.description;
-document.querySelector('#productAmount').value = product.amount;
-document.querySelector('#productImage').value = product.img_url;
+// function editProduct(index) {
+// let product = products[index];
+// document.querySelector('#productName').value = product.productName;
+// document.querySelector('#productCategory').value = product.category;
+// document.querySelector('#productDescription').value = product.description;
+// document.querySelector('#productAmount').value = product.amount;
+// document.querySelector('#productImage').value = product.img_url;
 
-javascript
-Copy code
-document.querySelector('#saveProductBtn').innerText = 'Update Product';
-document.querySelector('#saveProductBtn').onclick = function() {
-    updateProduct(index, product.id); // Pass the product.id as the productId parameter
-};
-let productModal = new bootstrap.Modal(document.getElementById('productModal'));
-productModal.show();
-}
+// document.querySelector('#saveProductBtn').innerText = 'Update Product';
+// document.querySelector('#saveProductBtn').onclick = function() {
+//     updateProduct(index, product.id); 
+// Pass the product.id as the productId parameter
+// };
+// let productModal = new bootstrap.Modal(document.getElementById('productModal'));
+// productModal.show();
+// }
 
 // Function to update a product
 
-function updateProduct(index, productId) {
-products[index].id = productId;
-products[index].productName = document.querySelector('#productName').value;
-products[index].category = document.querySelector('#productCategory').value;
-products[index].description = document.querySelector('#productDescription').value;
-products[index].amount = parseFloat(document.querySelector('#productAmount').value);
-products[index].img_url = document.querySelector('#productImage').value;
+// function updateProduct(index, productId) {
+// products[index].id = productId;
+// products[index].productName = document.querySelector('#productName').value;
+// products[index].category = document.querySelector('#productCategory').value;
+// products[index].description = document.querySelector('#productDescription').value;
+// products[index].amount = parseFloat(document.querySelector('#productAmount').value);
+// products[index].img_url = document.querySelector('#productImage').value;
 
 
-localStorage.setItem('products', JSON.stringify(products));
-displayProducts(products);
-document.querySelector('#productForm').reset();
-let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
-productModal.hide();
-}
+// localStorage.setItem('products', JSON.stringify(products));
+// displayProducts(products);
+// document.querySelector('#productForm').reset();
+// let productModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+// productModal.hide();
+// }
 
 // Function to delete a product
 function deleteProduct(index) {
