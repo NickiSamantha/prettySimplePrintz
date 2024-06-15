@@ -135,7 +135,7 @@ function editProduct(index) {
 }
 
 // Event listener for updating a product
-document.getElementById('saveEditProductBtn').addEventListener('click', function() {
+//document.getElementById('saveEditProductBtn').addEventListener('click', function() {
     let productId = this.dataset.productId;
     let productIndex = products.findIndex(p => p.id === parseInt(productId));
     if (productIndex !== -1) {
