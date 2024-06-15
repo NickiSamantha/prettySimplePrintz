@@ -137,12 +137,12 @@ function editProduct(index) {
 // Event listener for updating a product
 //document.getElementById('saveEditProductBtn').addEventListener('click', function() {
     // let productId = this.dataset.productId;
-    let productIndex = products.findIndex(p => p.id === parseInt(productId));
-    if (productIndex !== -1) {
-        updateProduct(productIndex, productId);
-    } else {
-        console.error(`Product with ID ${productId} not found.`);
-    }
+    // let productIndex = products.findIndex(p => p.id === parseInt(productId));
+    // if (productIndex !== -1) {
+    //     updateProduct(productIndex, productId);
+    // } else {
+    //     console.error(`Product with ID ${productId} not found.`);
+    // }
 //})
 ;
 
