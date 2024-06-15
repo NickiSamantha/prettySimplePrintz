@@ -143,7 +143,7 @@ function editProduct(index) {
     } else {
         console.error(`Product with ID ${productId} not found.`);
     }
-});
+);
 
 // Function to update a product
 function updateProduct(index, productId) {
